@@ -20,21 +20,62 @@ export default function CustomCursor() {
   const [pos, setPos] = useState<CursorPos>({ x: -100, y: -100 });
   const [motionState, setMotionState] = useState<CursorMotion>({ speed: 0, angle: 0 });
   const lastMouseRef = useRef<{ x: number; y: number; t: number } | null>(null);
+  const latestMouseRef = useRef<{ x: number; y: number; t: number } | null>(null);
+  const rafRef = useRef<number | null>(null);
+  const idleRef = useRef<number | null>(null);
+  const enableTimeoutRef = useRef<number | null>(null);
 
   const trailSizes = [10, 8, 6, 4, 3];
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(pointer: fine)");
 
+    const clearPendingEnable = () => {
+      if (idleRef.current !== null && "cancelIdleCallback" in window) {
+        (window as Window & { cancelIdleCallback: (id: number) => void }).cancelIdleCallback(idleRef.current);
+      }
+      idleRef.current = null;
+
+      if (enableTimeoutRef.current !== null) {
+        window.clearTimeout(enableTimeoutRef.current);
+      }
+      enableTimeoutRef.current = null;
+    };
+
     const updateEnabled = () => {
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      setEnabled(mediaQuery.matches && !reduceMotion);
+      const shouldEnable = mediaQuery.matches && !reduceMotion;
+
+      clearPendingEnable();
+
+      if (!shouldEnable) {
+        setEnabled(false);
+        return;
+      }
+
+      if ("requestIdleCallback" in window) {
+        idleRef.current = (
+          window as Window & {
+            requestIdleCallback: (cb: IdleRequestCallback, opts?: IdleRequestOptions) => number;
+          }
+        ).requestIdleCallback(() => {
+          setEnabled(true);
+          idleRef.current = null;
+        }, { timeout: 1200 });
+        return;
+      }
+
+      enableTimeoutRef.current = window.setTimeout(() => {
+        setEnabled(true);
+        enableTimeoutRef.current = null;
+      }, 500);
     };
 
     updateEnabled();
     mediaQuery.addEventListener("change", updateEnabled);
 
     return () => {
+      clearPendingEnable();
       mediaQuery.removeEventListener("change", updateEnabled);
     };
   }, []);
@@ -48,21 +89,37 @@ export default function CustomCursor() {
     document.body.classList.add("custom-cursor-enabled");
 
     const onMouseMove = (event: MouseEvent) => {
-      const now = performance.now();
-      const last = lastMouseRef.current;
+      latestMouseRef.current = { x: event.clientX, y: event.clientY, t: performance.now() };
 
-      if (last) {
-        const dx = event.clientX - last.x;
-        const dy = event.clientY - last.y;
-        const dt = Math.max(now - last.t, 1);
-        const distance = Math.hypot(dx, dy);
-        const speed = Math.min((distance / dt) * 22, 3.2);
-        const angle = Math.atan2(dy, dx) * (180 / Math.PI);
-        setMotionState({ speed, angle });
+      if (rafRef.current !== null) {
+        setVisible(true);
+        return;
       }
 
-      lastMouseRef.current = { x: event.clientX, y: event.clientY, t: now };
-      setPos({ x: event.clientX, y: event.clientY });
+      rafRef.current = requestAnimationFrame(() => {
+        const latest = latestMouseRef.current;
+        const last = lastMouseRef.current;
+
+        if (!latest) {
+          rafRef.current = null;
+          return;
+        }
+
+        if (last) {
+          const dx = latest.x - last.x;
+          const dy = latest.y - last.y;
+          const dt = Math.max(latest.t - last.t, 1);
+          const distance = Math.hypot(dx, dy);
+          const speed = Math.min((distance / dt) * 22, 3.2);
+          const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+          setMotionState({ speed, angle });
+        }
+
+        lastMouseRef.current = latest;
+        setPos({ x: latest.x, y: latest.y });
+        rafRef.current = null;
+      });
+
       setVisible(true);
     };
 
@@ -78,6 +135,11 @@ export default function CustomCursor() {
     return () => {
       document.body.classList.remove("custom-cursor-enabled");
       lastMouseRef.current = null;
+      latestMouseRef.current = null;
+      if (rafRef.current !== null) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
       window.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("mouseout", onMouseLeave);
       window.removeEventListener("mousedown", onMouseDown);
