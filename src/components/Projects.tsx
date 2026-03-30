@@ -35,7 +35,7 @@ const projects = [
   {
     id: "zdravy-projekt",
     title: "Zdravy-projekt",
-    type: "School Food Ordering Application",
+    type: "Food Ordering Application",
     description: "A company application for easier food ordering by schools with many daily users.",
     fullDescription:
       "Zdravy-projekt is built for high-volume daily school food ordering. It includes external data API integrations, PWA support, notifications, and operational integrations for scalable day-to-day processing.",
@@ -319,17 +319,6 @@ export default function Projects() {
 
                   <div className="space-y-6">
                     <div>
-                      <h4 className="text-xl font-bold text-white border-b border-zinc-800 pb-2 mb-4">Tech Stack</h4>
-                      <div className="flex flex-wrap gap-2.5">
-                        {selectedProject.tech.map((tech, i) => (
-                          <div key={i} title={tech} className="p-2 bg-zinc-900 border border-zinc-700/50 text-zinc-300 rounded-lg transition-all opacity-70 hover:opacity-100 hover:bg-zinc-800">
-                            {techIcons[tech] || <span className="text-xs font-medium">{tech}</span>}
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div>
                       <h4 className="text-xl font-bold text-white border-b border-zinc-800 pb-2 mb-4">Links</h4>
                       <div className="flex flex-col gap-3">
                         <a href={selectedProject.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-zinc-400 hover:text-white transition-colors group">
@@ -354,6 +343,17 @@ export default function Projects() {
                             <span className="font-medium text-sm">Live Application</span>
                           </a>
                         )}
+                      </div>
+                    </div>
+
+                    <div>
+                      <h4 className="text-xl font-bold text-white border-b border-zinc-800 pb-2 mb-4">Tech Stack</h4>
+                      <div className="flex flex-wrap gap-2.5">
+                        {selectedProject.tech.map((tech, i) => (
+                          <div key={i} title={tech} className="p-2 bg-zinc-900 border border-zinc-700/50 text-zinc-300 rounded-lg transition-all opacity-70 hover:opacity-100 hover:bg-zinc-800">
+                            {techIcons[tech] || <span className="text-xs font-medium">{tech}</span>}
+                          </div>
+                        ))}
                       </div>
                     </div>
                   </div>
