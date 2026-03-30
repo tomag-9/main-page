@@ -29,10 +29,20 @@ export default function CustomCursor() {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(pointer: fine)");
+    const requestIdle = (
+      globalThis as typeof globalThis & {
+        requestIdleCallback?: (cb: IdleRequestCallback, opts?: IdleRequestOptions) => number;
+      }
+    ).requestIdleCallback;
+    const cancelIdle = (
+      globalThis as typeof globalThis & {
+        cancelIdleCallback?: (id: number) => void;
+      }
+    ).cancelIdleCallback;
 
     const clearPendingEnable = () => {
-      if (idleRef.current !== null && "cancelIdleCallback" in window) {
-        (window as Window & { cancelIdleCallback: (id: number) => void }).cancelIdleCallback(idleRef.current);
+      if (idleRef.current !== null && cancelIdle) {
+        cancelIdle(idleRef.current);
       }
       idleRef.current = null;
 
@@ -53,12 +63,8 @@ export default function CustomCursor() {
         return;
       }
 
-      if ("requestIdleCallback" in window) {
-        idleRef.current = (
-          window as Window & {
-            requestIdleCallback: (cb: IdleRequestCallback, opts?: IdleRequestOptions) => number;
-          }
-        ).requestIdleCallback(() => {
+      if (requestIdle) {
+        idleRef.current = requestIdle(() => {
           setEnabled(true);
           idleRef.current = null;
         }, { timeout: 1200 });
