@@ -18,9 +18,9 @@ export default function Home() {
       <Contact />
       <BackToTop />
 
-      <footer className="w-full py-8 text-center border-t border-zinc-800/50 mt-12 bg-zinc-950/80 backdrop-blur-sm z-10">
-        <p className="text-zinc-500 flex items-center justify-center gap-2">
-          Designed and built with <Coffee size={16} className="text-emerald-500" /> by Tomáš Magula. &copy; {new Date().getFullYear()}
+      <footer className="w-full py-8 text-center border-t mt-12 z-10 border-slate-200/15 bg-slate-950/35 backdrop-blur-xl">
+        <p className="text-slate-300/75 flex items-center justify-center gap-2">
+          Designed and built with <Coffee size={16} className="text-orange-300" /> by Tomáš Magula. &copy; {new Date().getFullYear()}
         </p>
       </footer>
     </main>

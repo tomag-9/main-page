@@ -42,7 +42,7 @@ export default function BrandBar() {
       initial={{ opacity: 0, y: -16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.1 }}
-      className="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/70 bg-zinc-950/85 backdrop-blur-xl"
+      className="fixed top-0 left-0 right-0 z-50 border-b border-slate-200/10 bg-slate-950/35 backdrop-blur-xl"
     >
       {/* Scroll progress bar */}
       <motion.div
@@ -62,21 +62,20 @@ export default function BrandBar() {
           />
         </Link>
 
-        {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-6 text-sm text-zinc-300">
+        <div className="hidden md:flex items-center gap-5 text-sm text-slate-200/85">
           {navLinks.map((link) => (
             <Link
               key={link.id}
               href={link.href}
               className={`relative py-1 transition-colors duration-200 ${
-                activeSection === link.id ? "text-white" : "hover:text-white"
+                activeSection === link.id ? "text-cyan-200" : "hover:text-cyan-200"
               }`}
             >
               {link.label}
               {activeSection === link.id && (
                 <motion.div
                   layoutId="nav-active"
-                  className="absolute -bottom-0.5 left-0 right-0 h-[2px] bg-emerald-400 rounded-full"
+                  className="absolute -bottom-0.5 left-0 right-0 h-[2px] bg-cyan-400 rounded-full"
                   transition={{ type: "spring", stiffness: 400, damping: 35 }}
                 />
               )}
@@ -112,7 +111,7 @@ export default function BrandBar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
-            className="md:hidden border-t border-zinc-800/70 bg-zinc-950/95 backdrop-blur-xl overflow-hidden"
+            className="md:hidden border-t border-slate-200/10 bg-slate-950/95 backdrop-blur-xl overflow-hidden"
           >
             <div className="px-6 py-5 flex flex-col gap-5">
               {navLinks.map((link, i) => (
@@ -127,8 +126,8 @@ export default function BrandBar() {
                     onClick={() => setMobileOpen(false)}
                     className={`text-sm font-medium transition-colors ${
                       activeSection === link.id
-                        ? "text-emerald-400"
-                        : "text-zinc-300 hover:text-white"
+                        ? "text-cyan-300"
+                        : "text-slate-200/85 hover:text-cyan-200"
                     }`}
                   >
                     {link.label}

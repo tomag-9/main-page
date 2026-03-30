@@ -116,7 +116,7 @@ export default function TechStack() {
   const domains: Domain[] = ["Development", "Deployment & Integration"];
 
   return (
-    <section id="tech-stack" className="py-24 px-4 sm:px-8 lg:px-16 xl:px-24 relative z-10 w-full border-t border-zinc-800/40">
+    <section id="tech-stack" className="py-24 px-4 sm:px-8 lg:px-16 xl:px-24 relative z-10 w-full border-t border-slate-200/10">
       <div className="w-full max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -125,9 +125,9 @@ export default function TechStack() {
           transition={{ duration: 0.45 }}
           className="text-center mb-14"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Tech Arsenal</h2>
-          <p className="text-zinc-400 max-w-2xl mx-auto">
-            Organized by focus area, with lightweight level cues so the tools stay the main focus.
+          <h2 className="section-title text-3xl md:text-5xl font-bold mb-4">Tooling That Ships</h2>
+          <p className="muted-copy max-w-2xl mx-auto">
+            Grouped by development and operations so you can scan what I use to build and deliver.
           </p>
         </motion.div>
 
@@ -142,9 +142,9 @@ export default function TechStack() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: domainIndex * 0.1 }}
-                className={`glass-panel rounded-2xl p-5 sm:p-6 border-l-2 ${domain === "Development" ? "border-l-emerald-500/50" : "border-l-blue-500/50"}`}
+                className="glass-panel accent-ring rounded-2xl p-5 sm:p-6"
               >
-                <h3 className={`text-lg sm:text-xl font-semibold mb-4 ${domain === "Development" ? "text-emerald-100" : "text-blue-100"}`}>{domain}</h3>
+                <h3 className="text-lg sm:text-xl font-semibold text-slate-100 mb-4">{domain}</h3>
                 <div className="space-y-4">
                   {levelOrder.map((level) => (
                     <LevelRow key={`${domain}-${level}`} level={level} items={domainSkills.filter((item) => item.level === level)} />

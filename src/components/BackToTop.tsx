@@ -28,7 +28,7 @@ export default function BackToTop() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 12, scale: 0.92 }}
           transition={{ duration: 0.22 }}
-          className="fixed bottom-16 right-4 sm:bottom-20 sm:right-7 z-[65] h-11 w-11 rounded-full border border-zinc-700/80 bg-zinc-900/90 text-zinc-100 shadow-lg backdrop-blur hover:bg-zinc-800 transition-colors flex items-center justify-center"
+          className="fixed bottom-16 right-4 sm:bottom-20 sm:right-7 z-[65] h-11 w-11 rounded-full border border-slate-200/20 bg-slate-950/80 text-slate-100 shadow-lg backdrop-blur hover:bg-slate-900 transition-colors flex items-center justify-center"
           aria-label="Go to top"
         >
           <ChevronUp size={18} />
