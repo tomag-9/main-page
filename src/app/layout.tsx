@@ -15,8 +15,33 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://tomag.xyz"),
   title: "Tomáš Magula | Fullstack & DevOps Engineer",
   description: "Portfolio of Tomáš Magula, a Fullstack Engineer with a passion for infrastructure and DevOps.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    url: "https://tomag.xyz",
+    title: "Tomáš Magula | Fullstack & DevOps Engineer",
+    description: "Portfolio of Tomáš Magula, a Fullstack Engineer with a passion for infrastructure and DevOps.",
+    siteName: "Tomáš Magula Portfolio",
+    images: [
+      {
+        url: "/tomag-logo-full.svg",
+        width: 1200,
+        height: 630,
+        alt: "Tomáš Magula portfolio",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tomáš Magula | Fullstack & DevOps Engineer",
+    description: "Portfolio of Tomáš Magula, a Fullstack Engineer with a passion for infrastructure and DevOps.",
+    images: ["/tomag-logo-full.svg"],
+  },
   icons: {
     icon: "/tomag-icon.svg",
     shortcut: "/tomag-icon.svg",
