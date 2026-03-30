@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Sora, Space_Mono } from "next/font/google";
 import "./globals.css";
+import CustomCursor from "@/components/CustomCursor";
 
 const sora = Sora({
   variable: "--font-montserrat",
@@ -38,6 +39,7 @@ export default function RootLayout({
           <div className="absolute top-[32%] -right-24 h-[34rem] w-[34rem] rounded-full bg-orange-300/14 blur-[120px]" />
           <div className="absolute bottom-[-8rem] left-1/2 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-rose-300/10 blur-[130px]" />
         </div>
+        <CustomCursor />
         {children}
       </body>
     </html>

@@ -303,7 +303,7 @@ export default function Projects() {
                 <X size={20} />
               </button>
 
-              <div className="relative z-30 bg-zinc-950 p-6 md:p-10 pt-14 md:pt-16 flex flex-col gap-8 flex-1 min-h-0 overflow-y-auto overscroll-contain no-scrollbar">
+              <div className="relative z-30 bg-zinc-950 p-6 md:p-10 pt-8 md:pt-10 flex flex-col gap-8 flex-1 min-h-0 overflow-y-auto overscroll-contain no-scrollbar">
                 <div>
                   <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-2">{selectedProject.title}</h3>
                   <span className="text-sm md:text-md text-cyan-200 font-mono tracking-wide uppercase">{selectedProject.type}</span>
