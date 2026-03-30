@@ -142,9 +142,9 @@ export default function TechStack() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: domainIndex * 0.1 }}
-                className="glass-panel rounded-2xl p-5 sm:p-6"
+                className={`glass-panel rounded-2xl p-5 sm:p-6 border-l-2 ${domain === "Development" ? "border-l-emerald-500/50" : "border-l-blue-500/50"}`}
               >
-                <h3 className="text-lg sm:text-xl font-semibold text-zinc-100 mb-4">{domain}</h3>
+                <h3 className={`text-lg sm:text-xl font-semibold mb-4 ${domain === "Development" ? "text-emerald-100" : "text-blue-100"}`}>{domain}</h3>
                 <div className="space-y-4">
                   {levelOrder.map((level) => (
                     <LevelRow key={`${domain}-${level}`} level={level} items={domainSkills.filter((item) => item.level === level)} />

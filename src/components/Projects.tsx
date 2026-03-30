@@ -225,6 +225,11 @@ export default function Projects() {
               className={`group glass-panel rounded-3xl overflow-hidden transition-all duration-500 flex flex-col hover:-translate-y-2 border border-zinc-800/60 shadow-lg cursor-pointer ${project.borderHover}`}
             >
               <div className={`h-48 sm:h-56 w-full bg-gradient-to-br ${project.color} flex items-center justify-center relative overflow-hidden`}>
+                {/* Large faded project number */}
+                <span className="absolute bottom-2 right-3 text-[5.5rem] sm:text-[6.5rem] font-extrabold leading-none text-white/[0.06] select-none font-mono pointer-events-none">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+
                 {(project.id === "eventer" || project.id === "quizwizz") && project.images[0]?.startsWith("/") ? (
                   <Image
                     src={project.images[0]}

@@ -11,6 +11,8 @@ export default function Hero() {
 
   return (
     <section className="min-h-screen flex items-center justify-center pt-30 sm:pt-32 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Dot grid background */}
+      <div className="absolute inset-0 dot-grid -z-10 pointer-events-none [mask-image:radial-gradient(ellipse_80%_80%_at_50%_40%,black,transparent)]" />
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] bg-emerald-500/10 rounded-full blur-[80px] sm:blur-[120px] -z-10 pointer-events-none" />
       
       <div className="w-full max-w-[1400px] mx-auto text-center z-10 px-4 sm:px-8 md:px-12 lg:px-24">
@@ -75,6 +77,21 @@ export default function Hero() {
           </Link>
         </motion.div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.4, duration: 0.6 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-zinc-600 select-none pointer-events-none"
+      >
+        <span className="text-[10px] font-mono tracking-[0.25em] uppercase">Scroll</span>
+        <motion.div
+          animate={{ y: [0, 7, 0] }}
+          transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
+          className="w-px h-8 bg-gradient-to-b from-zinc-500 to-transparent"
+        />
+      </motion.div>
     </section>
   );
 }
