@@ -30,7 +30,7 @@ const experiences = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="experience" className="py-24 px-4 sm:px-6 lg:px-8 relative z-10 border-t border-slate-200/10">
       <div className="w-full max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
@@ -39,9 +39,9 @@ export default function Experience() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">My Journey</h2>
-          <p className="text-zinc-400 max-w-2xl mx-auto">
-            Blending formal education with self-taught expertise, active freelancing, and a non-stop passion for coding.
+          <h2 className="section-title text-3xl md:text-5xl font-bold mb-4">Journey & Momentum</h2>
+          <p className="muted-copy max-w-2xl mx-auto">
+            Education, production pressure, and product delivery combined into one engineering approach.
           </p>
         </motion.div>
 
@@ -72,18 +72,18 @@ export default function Experience() {
                   {exp.period}
                 </div>
 
-                <div className="flex-1 glass-panel p-6 sm:p-8 rounded-2xl relative z-10 border border-zinc-800/50 group-hover:border-emerald-500/20 group-hover:-translate-y-1 transition-all duration-300">
+                <div className="flex-1 glass-panel accent-ring p-6 sm:p-8 rounded-2xl relative z-10 border border-slate-200/10 group-hover:-translate-y-1 transition-all duration-300">
                   <h3 className="text-xl font-bold text-white mb-1 flex items-center gap-3">
                     <div className="p-2 sm:p-0 bg-zinc-900 sm:bg-transparent rounded-lg sm:rounded-none shadow-inner sm:shadow-none">
                       {exp.icon}
                     </div>
                     {exp.role}
                   </h3>
-                  <h4 className="text-md sm:text-lg text-emerald-500/80 mb-1">{exp.company}</h4>
+                  <h4 className="text-md sm:text-lg text-cyan-200/85 mb-1">{exp.company}</h4>
                   {"companySecondary" in exp && exp.companySecondary && (
-                    <h4 className="text-md sm:text-lg text-emerald-500/80 mb-4">{exp.companySecondary}</h4>
+                    <h4 className="text-md sm:text-lg text-cyan-200/85 mb-4">{exp.companySecondary}</h4>
                   )}
-                  <p className="text-zinc-400 leading-relaxed text-sm sm:text-base">
+                  <p className="text-slate-300/80 leading-relaxed text-sm sm:text-base">
                     {exp.description}
                   </p>
                 </div>

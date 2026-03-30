@@ -197,8 +197,8 @@ export default function Projects() {
   }, [selectedProject]);
 
   return (
-    <section id="projects" className="scroll-mt-28 py-24 px-4 sm:px-6 lg:px-8 relative z-10 border-t border-zinc-800/30">
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[120px] -z-10 pointer-events-none" />
+    <section id="projects" className="scroll-mt-28 py-24 px-4 sm:px-6 lg:px-8 relative z-10 border-t border-slate-200/10">
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-400/10 rounded-full blur-[120px] -z-10 pointer-events-none" />
       <div className="w-full max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -207,9 +207,9 @@ export default function Projects() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Featured Projects</h2>
-          <p className="text-zinc-400 max-w-2xl mx-auto px-4 sm:px-0">
-            A selection of projects across fullstack products, automation, and real-time applications.
+          <h2 className="section-title text-3xl md:text-5xl font-bold mb-4">Selected Work</h2>
+          <p className="muted-copy max-w-2xl mx-auto px-4 sm:px-0">
+            Projects across product engineering, automation, and interactive applications.
           </p>
         </motion.div>
 
@@ -222,7 +222,7 @@ export default function Projects() {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               onClick={() => setSelectedProject(project)}
-              className={`group glass-panel rounded-3xl overflow-hidden transition-all duration-500 flex flex-col hover:-translate-y-2 border border-zinc-800/60 shadow-lg cursor-pointer ${project.borderHover}`}
+              className={`group glass-panel accent-ring rounded-3xl overflow-hidden transition-all duration-500 flex flex-col hover:-translate-y-2 border border-slate-200/15 shadow-lg cursor-pointer ${project.borderHover}`}
             >
               <div className={`h-48 sm:h-56 w-full bg-gradient-to-br ${project.color} flex items-center justify-center relative overflow-hidden`}>
                 {(project.id === "eventer" || project.id === "quizwizz") && project.images[0]?.startsWith("/") ? (
@@ -247,19 +247,19 @@ export default function Projects() {
                 </div>
               </div>
 
-              <div className="p-6 sm:p-8 flex-1 flex flex-col bg-zinc-950/40 relative z-10 backdrop-blur-xl">
+              <div className="p-6 sm:p-8 flex-1 flex flex-col bg-slate-950/35 relative z-10 backdrop-blur-xl">
                 <div className="flex justify-between items-start mb-2">
                   <div>
                     <h3 className="text-2xl font-bold group-hover:text-white text-zinc-100 transition-colors">{project.title}</h3>
-                    <span className="text-xs sm:text-sm text-zinc-500 font-mono tracking-wide uppercase">{project.type}</span>
+                    <span className="text-xs sm:text-sm text-slate-300/60 font-mono tracking-wide uppercase">{project.type}</span>
                   </div>
                 </div>
 
-                <p className="text-zinc-400 mb-8 sm:mb-6 mt-4 flex-1 text-sm sm:text-base leading-relaxed line-clamp-3">
+                <p className="text-slate-300/75 mb-8 sm:mb-6 mt-4 flex-1 text-sm sm:text-base leading-relaxed line-clamp-3">
                   {project.description}
                 </p>
 
-                <div className="flex flex-wrap gap-2 sm:gap-2.5 mt-auto pt-4 border-t border-zinc-800/50">
+                <div className="flex flex-wrap gap-2 sm:gap-2.5 mt-auto pt-4 border-t border-slate-200/10">
                   {project.tech.map((tech, i) => (
                     <div key={i} title={tech} className="p-1.5 bg-zinc-900/90 hover:bg-zinc-800 text-zinc-300 rounded-lg border border-zinc-700/50 transition-colors flex items-center justify-center opacity-70 hover:opacity-100">
                       {techIcons[tech] || <span className="text-xs">{tech}</span>}
@@ -289,7 +289,7 @@ export default function Projects() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-4xl max-h-[calc(100vh-7rem)] sm:max-h-[calc(100vh-8rem)] border border-zinc-700/50 rounded-3xl shadow-2xl z-20 flex flex-col bg-zinc-950 overflow-hidden pointer-events-auto"
+              className="relative w-full max-w-4xl max-h-[calc(100vh-7rem)] sm:max-h-[calc(100vh-8rem)] border border-slate-200/15 rounded-3xl shadow-2xl z-20 flex flex-col bg-slate-950 overflow-hidden pointer-events-auto"
             >
               <button
                 onClick={() => setSelectedProject(null)}
@@ -301,7 +301,7 @@ export default function Projects() {
               <div className="relative z-30 bg-zinc-950 p-6 md:p-10 pt-14 md:pt-16 flex flex-col gap-8 flex-1 min-h-0 overflow-y-auto overscroll-contain no-scrollbar md:overflow-visible">
                 <div>
                   <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-2">{selectedProject.title}</h3>
-                  <span className="text-sm md:text-md text-emerald-400 font-mono tracking-wide uppercase">{selectedProject.type}</span>
+                  <span className="text-sm md:text-md text-cyan-200 font-mono tracking-wide uppercase">{selectedProject.type}</span>
                 </div>
 
                 <ImageCarousel key={selectedProject.id} images={selectedProject.images} isAutoPlay={true} />

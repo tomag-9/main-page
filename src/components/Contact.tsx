@@ -23,7 +23,7 @@ const contactLinks = [
 
 export default function Contact() {
   return (
-    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 relative z-10 border-t border-zinc-800/50">
+    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 relative z-10 border-t border-slate-200/10">
       <div className="w-full max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -32,8 +32,8 @@ export default function Contact() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">Let&apos;s connect</h2>
-          <p className="text-zinc-400 max-w-2xl mx-auto">Open to software engineering opportunities in Bratislava and remote collaborations.</p>
+          <h2 className="section-title text-3xl md:text-5xl font-bold mb-4">Let&apos;s Build Something Sharp</h2>
+          <p className="muted-copy max-w-2xl mx-auto">Open to software engineering opportunities in Bratislava and remote collaborations.</p>
         </motion.div>
 
         <motion.div
@@ -41,7 +41,7 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.55 }}
-          className="glass-panel rounded-2xl p-6 sm:p-8"
+          className="glass-panel accent-ring rounded-2xl p-6 sm:p-8"
         >
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {contactLinks.map((item) => (
@@ -50,9 +50,9 @@ export default function Contact() {
                 href={item.href}
                 target={item.href.startsWith("http") ? "_blank" : undefined}
                 rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="flex items-center gap-3 rounded-xl bg-zinc-900/60 border border-zinc-800/70 px-4 py-4 text-zinc-200 hover:text-white hover:border-emerald-500/40 transition-colors"
+                className="flex items-center gap-3 rounded-xl bg-slate-950/45 border border-slate-200/15 px-4 py-4 text-slate-100/85 hover:text-white hover:border-cyan-200/60 transition-colors"
               >
-                <span className="text-emerald-400">{item.icon}</span>
+                <span className="text-orange-300">{item.icon}</span>
                 <span className="text-sm sm:text-base break-all">{item.label}</span>
               </a>
             ))}

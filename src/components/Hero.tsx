@@ -11,38 +11,39 @@ export default function Hero() {
 
   return (
     <section className="min-h-screen flex items-center justify-center pt-30 sm:pt-32 pb-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] sm:w-[600px] h-[400px] sm:h-[600px] bg-emerald-500/10 rounded-full blur-[80px] sm:blur-[120px] -z-10 pointer-events-none" />
+      <div className="absolute top-[26%] left-[52%] -translate-x-1/2 -translate-y-1/2 w-[420px] sm:w-[640px] h-[420px] sm:h-[640px] bg-cyan-300/15 rounded-full blur-[90px] sm:blur-[130px] -z-10 pointer-events-none" />
+      <div className="absolute top-[48%] left-[35%] w-[280px] h-[280px] bg-orange-300/20 rounded-full blur-[95px] -z-10 pointer-events-none" />
       
       <div className="w-full max-w-[1400px] mx-auto text-center z-10 px-4 sm:px-8 md:px-12 lg:px-24">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel text-xs sm:text-sm font-medium text-emerald-400 mb-6 sm:mb-8"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel text-xs sm:text-sm font-medium text-cyan-100 mb-6 sm:mb-8"
         >
           <Terminal size={16} />
-          <span>Dev &amp; Ops</span>
+          <span>Engineer • Product Builder • DevOps</span>
         </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-4 sm:mb-6"
+          className="section-title text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-4 sm:mb-6"
         >
           Hi, I&apos;m <span className="text-white">Tomáš Magula</span>.
           <br />
-          <span className="gradient-text">Fullstack & DevOps</span>
+          <span className="gradient-text">I craft reliable digital systems.</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-base sm:text-lg md:text-xl text-zinc-400 mb-8 sm:mb-10 max-w-2xl mx-auto leading-relaxed px-4 sm:px-0"
+          className="muted-copy text-base sm:text-lg md:text-xl mb-8 sm:mb-10 max-w-2xl mx-auto leading-relaxed px-4 sm:px-0"
         >
-          I build practical fullstack software and enjoy designing clean delivery pipelines.
-          CI/CD, DevOps workflows, and reliable deployments are a core part of how I work.
+          From backend architecture to production pipelines, I build products that stay fast,
+          maintainable, and pleasant to use long after launch.
         </motion.p>
 
         <motion.div
@@ -57,7 +58,7 @@ export default function Hero() {
               e.preventDefault();
               scrollToSection("projects");
             }}
-            className="w-full sm:w-auto px-8 py-4 bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white rounded-xl font-medium transition-all flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20"
+            className="btn-primary w-full sm:w-auto px-8 py-4 active:scale-95 rounded-xl font-semibold transition-all flex items-center justify-center gap-2"
           >
             Explore Projects
             <motion.div
@@ -69,7 +70,7 @@ export default function Hero() {
           </Link>
           <Link
             href="#contact"
-            className="w-full sm:w-auto px-8 py-4 glass-panel hover:bg-zinc-800/60 active:scale-95 text-white rounded-xl font-medium transition-all flex items-center justify-center gap-2"
+            className="btn-ghost w-full sm:w-auto px-8 py-4 active:scale-95 rounded-xl font-medium transition-all flex items-center justify-center gap-2"
           >
             Contact
           </Link>

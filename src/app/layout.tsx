@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Montserrat, Space_Mono } from "next/font/google";
+import { Sora, Space_Mono } from "next/font/google";
 import "./globals.css";
 
-const montserrat = Montserrat({
+const sora = Sora({
   variable: "--font-montserrat",
   subsets: ["latin"],
 });
@@ -29,11 +29,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark scroll-smooth">
+    <html lang="en" className="scroll-smooth">
       <body
-        className={`${montserrat.variable} ${spaceMono.variable} antialiased bg-zinc-950 text-white font-sans selection:bg-emerald-500/30`}
+        className={`${sora.variable} ${spaceMono.variable} antialiased text-white font-sans selection:bg-cyan-300/40`}
       >
-        <div className="fixed inset-0 z-[-1] bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(16,185,129,0.15),rgba(255,255,255,0))]"></div>
+        <div className="fixed inset-0 z-[-1] pointer-events-none">
+          <div className="absolute -top-24 left-[12%] h-[26rem] w-[26rem] rounded-full bg-cyan-400/12 blur-[110px]" />
+          <div className="absolute top-[32%] -right-24 h-[34rem] w-[34rem] rounded-full bg-orange-300/14 blur-[120px]" />
+          <div className="absolute bottom-[-8rem] left-1/2 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-rose-300/10 blur-[130px]" />
+        </div>
         {children}
       </body>
     </html>
