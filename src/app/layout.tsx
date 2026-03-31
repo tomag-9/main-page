@@ -18,6 +18,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://tomag.xyz"),
   title: "Tomáš Magula | Fullstack & DevOps Engineer",
   description: "Portfolio of Tomáš Magula, a Fullstack Engineer with a passion for infrastructure and DevOps.",
+  manifest: "/site.webmanifest",
   alternates: {
     canonical: "/",
   },
@@ -43,9 +44,12 @@ export const metadata: Metadata = {
     images: ["/tomag-logo-full.svg"],
   },
   icons: {
-    icon: "/tomag-icon.svg",
-    shortcut: "/tomag-icon.svg",
-    apple: "/tomag-icon.svg",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/tomag-icon-square.svg", type: "image/svg+xml", sizes: "76x76" },
+    ],
+    shortcut: ["/favicon.ico"],
+    apple: [{ url: "/favicon.ico" }],
   },
 };
 
