@@ -10,7 +10,7 @@ const contactLinks = [
     icon: <Mail size={20} />,
   },
   {
-    href: "https://linkedin.com/in/tomas-magula-88035120b/",
+    href: "https://www.linkedin.com/in/tom%C3%A1%C5%A1-magula-88035120b/",
     label: "LinkedIn",
     icon: <Linkedin size={20} />,
   },
