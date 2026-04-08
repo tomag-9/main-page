@@ -159,7 +159,7 @@ export default function CustomCursor() {
     <>
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none fixed left-0 top-0 z-[99] h-2 w-18 rounded-full bg-gradient-to-r from-cyan-300/0 via-cyan-300/45 to-orange-300/0 blur-[2px]"
+        className="pointer-events-none fixed left-0 top-0 z-[230] h-2 w-18 rounded-full bg-gradient-to-r from-cyan-300/0 via-cyan-300/45 to-orange-300/0 blur-[2px]"
         animate={{
           x: pos.x - 36,
           y: pos.y - 4,
@@ -175,7 +175,7 @@ export default function CustomCursor() {
         <motion.div
           key={`trail-${size}`}
           aria-hidden="true"
-          className="pointer-events-none fixed left-0 top-0 z-[98] rounded-full bg-cyan-200/75"
+          className="pointer-events-none fixed left-0 top-0 z-[229] rounded-full bg-cyan-200/75"
           style={{ width: size, height: size }}
           animate={{
             x: pos.x - size / 2,
@@ -194,7 +194,7 @@ export default function CustomCursor() {
 
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none fixed left-0 top-0 z-[101] h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_10px_rgba(68,217,230,0.8)]"
+        className="pointer-events-none fixed left-0 top-0 z-[231] h-1.5 w-1.5 rounded-full bg-cyan-300 shadow-[0_0_10px_rgba(68,217,230,0.8)]"
         animate={{
           x: pos.x - 3,
           y: pos.y - 3,

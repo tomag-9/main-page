@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { createPortal } from "react-dom";
 import { ExternalLink, Github, Leaf, Crosshair, Calendar, Brain, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { SiNextdotjs, SiTypescript, SiTailwindcss, SiPostgresql, SiDocker, SiNestjs, SiReact, SiMqtt, SiRubyonrails, SiRedmine, SiRuby, SiSocketdotio, SiDjango, SiVite, SiRedis, SiCelery, SiGithubactions, SiPrometheus, SiGrafana, SiSentry } from "react-icons/si";
 
@@ -188,6 +189,11 @@ function ImageCarousel({ images, isAutoPlay }: { images: string[]; isAutoPlay: b
 
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = selectedProject ? "hidden" : "auto";
@@ -277,92 +283,95 @@ export default function Projects() {
         </div>
       </div>
 
-      <AnimatePresence>
-        {selectedProject && (
-          <div className="fixed inset-0 z-[70] flex items-start justify-center px-4 pb-4 pt-24 sm:px-6 sm:pb-6 sm:pt-28 md:px-10 md:pb-10 md:pt-32">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedProject(null)}
-              className="absolute inset-0 bg-black/85 backdrop-blur-md cursor-pointer"
-            />
-
-            <motion.div
-              layoutId={`project-${selectedProject.id}`}
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-4xl max-h-[calc(100vh-7rem)] sm:max-h-[calc(100vh-8rem)] border border-slate-200/15 rounded-3xl shadow-2xl z-20 flex flex-col bg-slate-950 overflow-hidden pointer-events-auto"
-            >
-              <button
+      {isMounted && createPortal(
+        <AnimatePresence>
+          {selectedProject && (
+            <div className="fixed inset-0 z-[200] flex items-center justify-center p-3 sm:p-5 md:p-8">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-4 right-4 z-50 p-2 bg-black/60 hover:bg-black/90 rounded-full text-zinc-300 transition-colors pointer-events-auto"
+                className="absolute inset-0 bg-black/85 backdrop-blur-md cursor-pointer"
+              />
+
+              <motion.div
+                layoutId={`project-${selectedProject.id}`}
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                className="relative w-full max-w-4xl max-h-[calc(100vh-1.5rem)] sm:max-h-[calc(100vh-2.5rem)] md:max-h-[calc(100vh-4rem)] border border-slate-200/15 rounded-3xl shadow-2xl z-20 flex flex-col bg-slate-950 overflow-hidden pointer-events-auto"
               >
-                <X size={20} />
-              </button>
+                <button
+                  onClick={() => setSelectedProject(null)}
+                  className="absolute top-4 right-4 z-50 p-2 bg-black/60 hover:bg-black/90 rounded-full text-zinc-300 transition-colors pointer-events-auto"
+                >
+                  <X size={20} />
+                </button>
 
-              <div className="relative z-30 bg-zinc-950 p-6 md:p-10 pt-8 md:pt-10 flex flex-col gap-8 flex-1 min-h-0 overflow-y-auto overscroll-contain no-scrollbar">
-                <div>
-                  <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-2">{selectedProject.title}</h3>
-                  <span className="text-sm md:text-md text-cyan-200 font-mono tracking-wide uppercase">{selectedProject.type}</span>
-                </div>
-
-                <ImageCarousel key={selectedProject.id} images={selectedProject.images} isAutoPlay={true} />
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  <div className="md:col-span-2 space-y-6">
-                    <h4 className="text-xl font-bold text-white border-b border-zinc-800 pb-2">Overview</h4>
-                    <p className="text-zinc-300 leading-relaxed text-sm md:text-base">{selectedProject.fullDescription}</p>
+                <div className="relative z-30 bg-zinc-950 p-6 md:p-10 pt-8 md:pt-10 flex flex-col gap-8 flex-1 min-h-0 overflow-y-auto overscroll-contain no-scrollbar">
+                  <div>
+                    <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-2">{selectedProject.title}</h3>
+                    <span className="text-sm md:text-md text-cyan-200 font-mono tracking-wide uppercase">{selectedProject.type}</span>
                   </div>
 
-                  <div className="space-y-6">
-                    <div>
-                      <h4 className="text-xl font-bold text-white border-b border-zinc-800 pb-2 mb-4">Links</h4>
-                      <div className="flex flex-col gap-3">
-                        <a href={selectedProject.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-zinc-400 hover:text-white transition-colors group">
-                          <div className="p-2 bg-zinc-900 rounded-lg group-hover:bg-zinc-800 transition-colors">
-                            <Github size={18} />
-                          </div>
-                          <span className="font-medium text-sm">Source Code</span>
-                        </a>
-                        {selectedProject.thesis && (
-                          <a href={selectedProject.thesis} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-zinc-400 hover:text-white transition-colors group">
-                            <div className="p-2 bg-zinc-900 rounded-lg group-hover:bg-zinc-800 transition-colors">
-                              <ExternalLink size={18} />
-                            </div>
-                            <span className="font-medium text-sm">Bachelor&apos;s Thesis</span>
-                          </a>
-                        )}
-                        {selectedProject.live && (
-                          <a href={selectedProject.live} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-zinc-400 hover:text-white transition-colors group">
-                            <div className="p-2 bg-zinc-900 rounded-lg group-hover:bg-zinc-800 transition-colors">
-                              <ExternalLink size={18} />
-                            </div>
-                            <span className="font-medium text-sm">Live Application</span>
-                          </a>
-                        )}
-                      </div>
+                  <ImageCarousel key={selectedProject.id} images={selectedProject.images} isAutoPlay={true} />
+
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div className="md:col-span-2 space-y-6">
+                      <h4 className="text-xl font-bold text-white border-b border-zinc-800 pb-2">Overview</h4>
+                      <p className="text-zinc-300 leading-relaxed text-sm md:text-base">{selectedProject.fullDescription}</p>
                     </div>
 
-                    <div>
-                      <h4 className="text-xl font-bold text-white border-b border-zinc-800 pb-2 mb-4">Tech Stack</h4>
-                      <div className="flex flex-wrap gap-2.5">
-                        {selectedProject.tech.map((tech, i) => (
-                          <div key={i} title={tech} className="p-2 bg-zinc-900 border border-zinc-700/50 text-zinc-300 rounded-lg transition-all opacity-70 hover:opacity-100 hover:bg-zinc-800">
-                            {techIcons[tech] || <span className="text-xs font-medium">{tech}</span>}
-                          </div>
-                        ))}
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="text-xl font-bold text-white border-b border-zinc-800 pb-2 mb-4">Links</h4>
+                        <div className="flex flex-col gap-3">
+                          <a href={selectedProject.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-zinc-400 hover:text-white transition-colors group">
+                            <div className="p-2 bg-zinc-900 rounded-lg group-hover:bg-zinc-800 transition-colors">
+                              <Github size={18} />
+                            </div>
+                            <span className="font-medium text-sm">Source Code</span>
+                          </a>
+                          {selectedProject.thesis && (
+                            <a href={selectedProject.thesis} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-zinc-400 hover:text-white transition-colors group">
+                              <div className="p-2 bg-zinc-900 rounded-lg group-hover:bg-zinc-800 transition-colors">
+                                <ExternalLink size={18} />
+                              </div>
+                              <span className="font-medium text-sm">Bachelor&apos;s Thesis</span>
+                            </a>
+                          )}
+                          {selectedProject.live && (
+                            <a href={selectedProject.live} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-zinc-400 hover:text-white transition-colors group">
+                              <div className="p-2 bg-zinc-900 rounded-lg group-hover:bg-zinc-800 transition-colors">
+                                <ExternalLink size={18} />
+                              </div>
+                              <span className="font-medium text-sm">Live Application</span>
+                            </a>
+                          )}
+                        </div>
+                      </div>
+
+                      <div>
+                        <h4 className="text-xl font-bold text-white border-b border-zinc-800 pb-2 mb-4">Tech Stack</h4>
+                        <div className="flex flex-wrap gap-2.5">
+                          {selectedProject.tech.map((tech, i) => (
+                            <div key={i} title={tech} className="p-2 bg-zinc-900 border border-zinc-700/50 text-zinc-300 rounded-lg transition-all opacity-70 hover:opacity-100 hover:bg-zinc-800">
+                              {techIcons[tech] || <span className="text-xs font-medium">{tech}</span>}
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </section>
   );
 }
