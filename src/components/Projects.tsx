@@ -4,7 +4,18 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { createPortal } from "react-dom";
-import { ExternalLink, Github, Leaf, Crosshair, Calendar, Brain, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { useLocale } from "@/lib/i18n";
+import {
+  ArrowSquareOut,
+  Brain,
+  CalendarBlank,
+  CaretLeft,
+  CaretRight,
+  Crosshair,
+  GithubLogo,
+  Plant,
+  X,
+} from "@phosphor-icons/react";
 import { SiNextdotjs, SiTypescript, SiTailwindcss, SiPostgresql, SiDocker, SiNestjs, SiReact, SiMqtt, SiRubyonrails, SiRedmine, SiRuby, SiSocketdotio, SiDjango, SiVite, SiRedis, SiCelery, SiGithubactions, SiPrometheus, SiGrafana, SiSentry } from "react-icons/si";
 
 const techIcons: Record<string, React.ReactNode> = {
@@ -32,55 +43,69 @@ const techIcons: Record<string, React.ReactNode> = {
   "Socket.io": <SiSocketdotio size={18} />,
 };
 
-const projects = [
+type ProjectId = "zdravy-projekt" | "e-plant" | "eventer" | "quizwizz";
+
+type Project = {
+  id: ProjectId;
+  title: string;
+  tech: string[];
+  github: string | null;
+  live: string | null;
+  thesis: string | null;
+  icon: React.ReactNode;
+  color: string;
+  borderHover: string;
+  images: string[];
+  ongoing: boolean;
+};
+
+const projects: Project[] = [
   {
     id: "zdravy-projekt",
     title: "Zdravy-projekt",
-    type: "Food Ordering Application",
-    description: "A company application for easier food ordering by schools with many daily users.",
-    fullDescription:
-      "Zdravy-projekt is built for high-volume daily school food ordering. It includes external data API integrations, PWA support, notifications, and operational integrations for scalable day-to-day processing.",
     tech: ["Django", "Swarm", "Redis", "Celery", "GitHub Actions", "Traefik", "Prometheus", "Grafana", "Sentry"],
-    github: "https://github.com/magi-9/zdravy-projekt",
+    github: null,
     live: null,
     thesis: null,
-    icon: <Crosshair size={48} className="text-white/30 group-hover:scale-125 group-hover:text-red-400 transition-all duration-500" />,
-    color: "from-red-500/20 to-orange-500/10",
-    borderHover: "hover:border-red-500/50 hover:shadow-red-500/10",
-    images: ["bg-red-500/20", "bg-orange-500/20", "bg-rose-500/20"],
+    icon: <Crosshair size={48} weight="regular" className="text-amber-200/45 transition-all duration-500 group-hover:scale-110 group-hover:text-amber-200" />,
+    color: "from-amber-400/18 to-zinc-900/70",
+    borderHover: "hover:border-amber-300/45 hover:shadow-[0_24px_70px_rgba(245,154,61,0.1)]",
+    images: [
+      "/projects/zdravy-projekt/dashboard.png",
+      "/projects/zdravy-projekt/order-desktop.png",
+      "/projects/zdravy-projekt/login-desktop.png",
+      "/projects/zdravy-projekt/order-mobile.png",
+    ],
     ongoing: true,
   },
   {
     id: "e-plant",
     title: "e-plant",
-    type: "E-Commerce Application",
-    description: "An e-commerce app for selling dental implants and courses.",
-    fullDescription:
-      "e-plant is an e-commerce platform for dental implants and courses. It includes warehouse workflows, notifications, and integrations with accounting software and shipping companies.",
     tech: ["Django", "React", "GitHub Actions", "Redis", "Celery"],
-    github: "https://github.com/magi-9/e-plant",
-    live: null,
+    github: null,
+    live: "https://dynamicabutment.ebringer.sk/products",
     thesis: null,
-    icon: <Leaf size={48} className="text-white/30 group-hover:scale-125 group-hover:text-green-400 transition-all duration-500" />,
-    color: "from-green-500/20 to-emerald-500/10",
-    borderHover: "hover:border-green-500/50 hover:shadow-green-500/10",
-    images: ["bg-green-500/20", "bg-emerald-500/20", "bg-teal-500/20"],
+    icon: <Plant size={48} weight="regular" className="text-amber-200/45 transition-all duration-500 group-hover:scale-110 group-hover:text-amber-200" />,
+    color: "from-amber-400/16 to-zinc-900/70",
+    borderHover: "hover:border-amber-300/45 hover:shadow-[0_24px_70px_rgba(245,154,61,0.1)]",
+    images: [
+      "/projects/e-plant/listing.png",
+      "/projects/e-plant/multi-unit-detail.png",
+      "/projects/e-plant/mobile-product.png",
+      "/projects/e-plant/mobile-filtered.png",
+    ],
     ongoing: true,
   },
   {
     id: "eventer",
     title: "Eventer",
-    type: "Redmine Plugin",
-    description: "Automated task assignment plugin for Redmine based on qualifications and availability.",
-    fullDescription:
-      "Eventer is an automation-focused Redmine plugin that helps assign tasks to suitable team members. The aim is better project flow, less manual management work, and consistent assignment logic.",
     tech: ["Ruby", "Ruby on Rails", "Docker", "PostgreSQL", "Redmine"],
     github: "https://github.com/magi-9/eventer",
     live: null,
     thesis: "https://github.com/magi-9/eventer/blob/main/docs/thesis.pdf",
-    icon: <Calendar size={48} className="text-white/30 group-hover:scale-125 group-hover:text-blue-400 transition-all duration-500" />,
-    color: "from-blue-500/20 to-cyan-500/10",
-    borderHover: "hover:border-blue-500/50 hover:shadow-blue-500/10",
+    icon: <CalendarBlank size={48} weight="regular" className="text-amber-200/45 transition-all duration-500 group-hover:scale-110 group-hover:text-amber-200" />,
+    color: "from-amber-400/14 to-zinc-900/70",
+    borderHover: "hover:border-amber-300/45 hover:shadow-[0_24px_70px_rgba(245,154,61,0.1)]",
     images: [
       "/projects/eventer/demo_user.png",
       "/projects/eventer/demo_issue.png",
@@ -91,17 +116,13 @@ const projects = [
   {
     id: "quizwizz",
     title: "QuizWizz",
-    type: "UI/UX Application",
-    description: "A UI/UX-focused interactive quiz platform with instant scoring, real-time competition, and admin controls.",
-    fullDescription:
-      "QuizWizz is primarily a UI/UX-driven application focused on fast interaction, clear navigation, and polished user flows for quiz sessions, scoring, and administration.",
     tech: ["React", "Django", "Vite"],
     github: "https://github.com/BeloIV/QuizWizz",
     live: "https://quiz.tomag.xyz/",
     thesis: null,
-    icon: <Brain size={48} className="text-white/30 group-hover:scale-125 group-hover:text-purple-400 transition-all duration-500" />,
-    color: "from-purple-500/20 to-pink-500/10",
-    borderHover: "hover:border-purple-500/50 hover:shadow-purple-500/10",
+    icon: <Brain size={48} weight="regular" className="text-amber-200/45 transition-all duration-500 group-hover:scale-110 group-hover:text-amber-200" />,
+    color: "from-amber-400/14 to-zinc-900/70",
+    borderHover: "hover:border-amber-300/45 hover:shadow-[0_24px_70px_rgba(245,154,61,0.1)]",
     images: [
       "/projects/quizwizz/image.png",
       "/projects/quizwizz/image copy.png",
@@ -125,7 +146,7 @@ function ImageCarousel({ images, isAutoPlay }: { images: string[]; isAutoPlay: b
   }, [images.length, isAutoPlay, resetTick]);
 
   return (
-    <div className="relative w-full h-[44vh] min-h-[300px] max-h-[460px] sm:h-72 md:h-80 rounded-xl overflow-hidden group">
+    <div className="group relative h-[44vh] max-h-[460px] min-h-[300px] w-full overflow-hidden rounded-2xl border border-zinc-100/10 sm:h-72 md:h-80">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}
@@ -143,11 +164,11 @@ function ImageCarousel({ images, isAutoPlay }: { images: string[]; isAutoPlay: b
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-black/45" />
+              <div className="absolute inset-0 bg-zinc-950/35" />
             </>
           ) : (
             <div className={`absolute inset-0 ${images[currentIndex]} flex items-center justify-center`}>
-              <span className="text-white/50 font-mono tracking-widest text-sm bg-black/30 px-4 py-2 rounded-full backdrop-blur-sm shadow-inner">
+              <span className="rounded-full bg-zinc-950/45 px-4 py-2 font-mono text-sm text-zinc-200/70 shadow-inner backdrop-blur-sm">
                 Project Preview {currentIndex + 1}
               </span>
             </div>
@@ -155,16 +176,16 @@ function ImageCarousel({ images, isAutoPlay }: { images: string[]; isAutoPlay: b
         </motion.div>
       </AnimatePresence>
 
-      <div className="absolute inset-0 flex items-center justify-between p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+      <div className="absolute inset-0 flex items-center justify-between p-2 opacity-0 transition-opacity group-hover:opacity-100">
         <button
           onClick={(e) => {
             e.stopPropagation();
             setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
             setResetTick((prev) => prev + 1);
           }}
-          className="p-1 rounded-full bg-black/50 text-white hover:bg-black/80 transition-colors"
+          className="rounded-full bg-zinc-950/70 p-1 text-white transition-colors hover:bg-zinc-900"
         >
-          <ChevronLeft size={20} />
+          <CaretLeft size={20} weight="regular" />
         </button>
         <button
           onClick={(e) => {
@@ -172,15 +193,15 @@ function ImageCarousel({ images, isAutoPlay }: { images: string[]; isAutoPlay: b
             setCurrentIndex((prev) => (prev + 1) % images.length);
             setResetTick((prev) => prev + 1);
           }}
-          className="p-1 rounded-full bg-black/50 text-white hover:bg-black/80 transition-colors"
+          className="rounded-full bg-zinc-950/70 p-1 text-white transition-colors hover:bg-zinc-900"
         >
-          <ChevronRight size={20} />
+          <CaretRight size={20} weight="regular" />
         </button>
       </div>
 
       <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-2">
         {images.map((_, i) => (
-          <div key={i} className={`w-1.5 h-1.5 rounded-full transition-all ${i === currentIndex ? "bg-white w-3" : "bg-white/50"}`} />
+          <div key={i} className={`h-1.5 rounded-full transition-all ${i === currentIndex ? "w-3 bg-amber-300" : "w-1.5 bg-white/50"}`} />
         ))}
       </div>
     </div>
@@ -188,11 +209,23 @@ function ImageCarousel({ images, isAutoPlay }: { images: string[]; isAutoPlay: b
 }
 
 export default function Projects() {
-  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+  const { t } = useLocale();
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isMounted, setIsMounted] = useState(false);
+  const selectedProjectText = selectedProject ? t.projects.items[selectedProject.id] : null;
 
   useEffect(() => {
-    setIsMounted(true);
+    let active = true;
+
+    queueMicrotask(() => {
+      if (active) {
+        setIsMounted(true);
+      }
+    });
+
+    return () => {
+      active = false;
+    };
   }, []);
 
   useEffect(() => {
@@ -203,40 +236,37 @@ export default function Projects() {
   }, [selectedProject]);
 
   return (
-    <section id="projects" className="scroll-mt-28 py-24 px-4 sm:px-6 lg:px-8 relative z-10 border-t border-slate-200/10">
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyan-400/10 rounded-full blur-[120px] -z-10 pointer-events-none" />
+    <section id="projects" className="relative z-10 scroll-mt-28 border-t border-zinc-100/10 px-4 py-24 sm:px-6 lg:px-8">
       <div className="w-full max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-16 text-center"
         >
-          <h2 className="section-title text-3xl md:text-5xl font-bold mb-4">Selected Work</h2>
-          <p className="muted-copy max-w-2xl mx-auto px-4 sm:px-0">
-            Projects across product engineering, automation, and interactive applications.
-          </p>
+          <h2 className="section-title mb-4 text-3xl font-bold md:text-5xl">{t.projects.heading}</h2>
+          <p className="muted-copy max-w-2xl mx-auto px-4 sm:px-0">{t.projects.subtext}</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              onClick={() => setSelectedProject(project)}
-              className={`group glass-panel accent-ring rounded-3xl overflow-hidden transition-all duration-500 flex flex-col hover:-translate-y-2 border border-slate-200/15 shadow-lg cursor-pointer ${project.borderHover}`}
-            >
-              <div className={`h-48 sm:h-56 w-full bg-gradient-to-br ${project.color} flex items-center justify-center relative overflow-hidden`}>
-                {/* Large faded project number */}
-                <span className="absolute bottom-2 right-3 text-[5.5rem] sm:text-[6.5rem] font-extrabold leading-none text-white/[0.06] select-none font-mono pointer-events-none">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project, index) => {
+            const projectText = t.projects.items[project.id];
 
-                {(project.id === "eventer" || project.id === "quizwizz") && project.images[0]?.startsWith("/") ? (
+            return (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                onClick={() => setSelectedProject(project)}
+                className={`group glass-panel flex cursor-pointer flex-col overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-1 ${project.borderHover} ${
+                  index === 0 ? "lg:col-span-2" : ""
+                }`}
+              >
+              <div className={`relative flex h-48 w-full items-center justify-center overflow-hidden bg-gradient-to-br ${project.color} sm:h-56 ${index === 0 ? "lg:h-72" : ""}`}>
+                {project.images[0]?.startsWith("/") ? (
                   <Image
                     src={project.images[0]}
                     alt={`${project.title} preview`}
@@ -246,53 +276,53 @@ export default function Projects() {
                 ) : (
                   project.icon
                 )}
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-500" />
+                <div className="absolute inset-0 bg-zinc-950/45 transition-colors duration-500 group-hover:bg-zinc-950/20" />
                 {project.ongoing && (
-                  <div className="absolute top-4 right-4 flex items-center gap-2">
-                    <span className="text-xs font-semibold text-green-400">In Progress</span>
-                    <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></div>
+                  <div className="absolute right-4 top-4 rounded-full border border-amber-300/30 bg-zinc-950/62 px-3 py-1 text-xs font-semibold text-amber-200 backdrop-blur">
+                    {t.projects.inProgress}
                   </div>
                 )}
-                <div className="absolute bottom-4 right-4 bg-black/50 rounded-full px-3 py-1 text-xs font-medium text-white/80 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all">
-                  Click to Expand
+                <div className="absolute bottom-4 right-4 translate-y-2 rounded-full bg-zinc-950/62 px-3 py-1 text-xs font-medium text-white/80 opacity-0 backdrop-blur transition-all group-hover:translate-y-0 group-hover:opacity-100">
+                  {t.projects.clickToExpand}
                 </div>
               </div>
 
-              <div className="p-6 sm:p-8 flex-1 flex flex-col bg-slate-950/35 relative z-10 backdrop-blur-xl">
-                <div className="flex justify-between items-start mb-2">
+              <div className="relative z-10 flex flex-1 flex-col bg-zinc-950/35 p-6 backdrop-blur-xl sm:p-8">
+                <div className="mb-2 flex items-start justify-between">
                   <div>
-                    <h3 className="text-2xl font-bold group-hover:text-white text-zinc-100 transition-colors">{project.title}</h3>
-                    <span className="text-xs sm:text-sm text-slate-300/60 font-mono tracking-wide uppercase">{project.type}</span>
+                    <h3 className="text-2xl font-bold text-zinc-100 transition-colors group-hover:text-white">{project.title}</h3>
+                    <span className="font-mono text-xs text-zinc-400 sm:text-sm">{projectText.type}</span>
                   </div>
                 </div>
 
-                <p className="text-slate-300/75 mb-8 sm:mb-6 mt-4 flex-1 text-sm sm:text-base leading-relaxed line-clamp-3">
-                  {project.description}
+                <p className="mb-8 mt-4 line-clamp-3 flex-1 text-sm leading-relaxed text-zinc-300/75 sm:mb-6 sm:text-base">
+                  {projectText.description}
                 </p>
 
-                <div className="flex flex-wrap gap-2 sm:gap-2.5 mt-auto pt-4 border-t border-slate-200/10">
+                <div className="mt-auto flex flex-wrap gap-2 border-t border-zinc-100/10 pt-4 sm:gap-2.5">
                   {project.tech.map((tech, i) => (
-                    <div key={i} title={tech} className="p-1.5 bg-zinc-900/90 hover:bg-zinc-800 text-zinc-300 rounded-lg border border-zinc-700/50 transition-colors flex items-center justify-center opacity-70 hover:opacity-100">
+                    <div key={i} title={tech} className="flex items-center justify-center rounded-lg border border-zinc-100/10 bg-zinc-900/90 p-1.5 text-zinc-300 opacity-75 transition-colors hover:border-amber-300/40 hover:bg-zinc-800 hover:opacity-100">
                       {techIcons[tech] || <span className="text-xs">{tech}</span>}
                     </div>
                   ))}
                 </div>
               </div>
             </motion.div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
       {isMounted && createPortal(
         <AnimatePresence>
-          {selectedProject && (
+          {selectedProject && selectedProjectText && (
             <div className="fixed inset-0 z-[200] flex items-center justify-center p-3 sm:p-5 md:p-8">
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={() => setSelectedProject(null)}
-                className="absolute inset-0 bg-black/85 backdrop-blur-md cursor-pointer"
+                className="absolute inset-0 cursor-pointer bg-zinc-950/88 backdrop-blur-md"
               />
 
               <motion.div
@@ -301,63 +331,67 @@ export default function Projects() {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: 20 }}
                 transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                className="relative w-full max-w-4xl max-h-[calc(100vh-1.5rem)] sm:max-h-[calc(100vh-2.5rem)] md:max-h-[calc(100vh-4rem)] border border-slate-200/15 rounded-3xl shadow-2xl z-20 flex flex-col bg-slate-950 overflow-hidden pointer-events-auto"
+                className="pointer-events-auto relative z-20 flex max-h-[calc(100vh-1.5rem)] w-full max-w-4xl flex-col overflow-hidden rounded-2xl border border-zinc-100/15 bg-zinc-950 shadow-2xl sm:max-h-[calc(100vh-2.5rem)] md:max-h-[calc(100vh-4rem)]"
               >
                 <button
                   onClick={() => setSelectedProject(null)}
-                  className="absolute top-4 right-4 z-50 p-2 bg-black/60 hover:bg-black/90 rounded-full text-zinc-300 transition-colors pointer-events-auto"
+                  className="pointer-events-auto absolute right-4 top-4 z-50 rounded-full bg-zinc-950/70 p-2 text-zinc-300 transition-colors hover:text-amber-200"
                 >
-                  <X size={20} />
+                  <X size={20} weight="regular" />
                 </button>
 
-                <div className="relative z-30 bg-zinc-950 p-6 md:p-10 pt-8 md:pt-10 flex flex-col gap-8 flex-1 min-h-0 overflow-y-auto overscroll-contain no-scrollbar">
+                <div className="no-scrollbar relative z-30 flex min-h-0 flex-1 flex-col gap-8 overflow-y-auto overscroll-contain bg-zinc-950 p-6 pt-8 md:p-10 md:pt-10">
                   <div>
-                    <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-2">{selectedProject.title}</h3>
-                    <span className="text-sm md:text-md text-cyan-200 font-mono tracking-wide uppercase">{selectedProject.type}</span>
+                    <h3 className="mb-2 text-3xl font-extrabold text-white md:text-4xl">{selectedProject.title}</h3>
+                    <span className="font-mono text-sm text-amber-100/85 md:text-base">{selectedProjectText.type}</span>
                   </div>
 
                   <ImageCarousel key={selectedProject.id} images={selectedProject.images} isAutoPlay={true} />
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div className="md:col-span-2 space-y-6">
-                      <h4 className="text-xl font-bold text-white border-b border-zinc-800 pb-2">Overview</h4>
-                      <p className="text-zinc-300 leading-relaxed text-sm md:text-base">{selectedProject.fullDescription}</p>
+                      <h4 className="border-b border-zinc-800 pb-2 text-xl font-bold text-white">{t.projects.overview}</h4>
+                      <p className="text-zinc-300 leading-relaxed text-sm md:text-base">{selectedProjectText.fullDescription}</p>
                     </div>
 
                     <div className="space-y-6">
+                      {(selectedProject.github || selectedProject.thesis || selectedProject.live) && (
                       <div>
-                        <h4 className="text-xl font-bold text-white border-b border-zinc-800 pb-2 mb-4">Links</h4>
+                        <h4 className="text-xl font-bold text-white border-b border-zinc-800 pb-2 mb-4">{t.projects.links}</h4>
                         <div className="flex flex-col gap-3">
-                          <a href={selectedProject.github} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-zinc-400 hover:text-white transition-colors group">
-                            <div className="p-2 bg-zinc-900 rounded-lg group-hover:bg-zinc-800 transition-colors">
-                              <Github size={18} />
+                          {selectedProject.github && (
+                          <a href={selectedProject.github} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 text-zinc-400 transition-colors hover:text-white">
+                            <div className="rounded-lg bg-zinc-900 p-2 transition-colors group-hover:bg-zinc-800 group-hover:text-amber-200">
+                              <GithubLogo size={18} weight="regular" />
                             </div>
-                            <span className="font-medium text-sm">Source Code</span>
+                            <span className="font-medium text-sm">{t.projects.sourceCode}</span>
                           </a>
+                          )}
                           {selectedProject.thesis && (
-                            <a href={selectedProject.thesis} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-zinc-400 hover:text-white transition-colors group">
-                              <div className="p-2 bg-zinc-900 rounded-lg group-hover:bg-zinc-800 transition-colors">
-                                <ExternalLink size={18} />
+                            <a href={selectedProject.thesis} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 text-zinc-400 transition-colors hover:text-white">
+                              <div className="rounded-lg bg-zinc-900 p-2 transition-colors group-hover:bg-zinc-800 group-hover:text-amber-200">
+                                <ArrowSquareOut size={18} weight="regular" />
                               </div>
-                              <span className="font-medium text-sm">Bachelor&apos;s Thesis</span>
+                              <span className="font-medium text-sm">{t.projects.thesis}</span>
                             </a>
                           )}
                           {selectedProject.live && (
-                            <a href={selectedProject.live} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-zinc-400 hover:text-white transition-colors group">
-                              <div className="p-2 bg-zinc-900 rounded-lg group-hover:bg-zinc-800 transition-colors">
-                                <ExternalLink size={18} />
+                            <a href={selectedProject.live} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 text-zinc-400 transition-colors hover:text-white">
+                              <div className="rounded-lg bg-zinc-900 p-2 transition-colors group-hover:bg-zinc-800 group-hover:text-amber-200">
+                                <ArrowSquareOut size={18} weight="regular" />
                               </div>
-                              <span className="font-medium text-sm">Live Application</span>
+                              <span className="font-medium text-sm">{t.projects.liveApplication}</span>
                             </a>
                           )}
                         </div>
                       </div>
+                      )}
 
                       <div>
-                        <h4 className="text-xl font-bold text-white border-b border-zinc-800 pb-2 mb-4">Tech Stack</h4>
+                        <h4 className="text-xl font-bold text-white border-b border-zinc-800 pb-2 mb-4">{t.projects.techStackLabel}</h4>
                         <div className="flex flex-wrap gap-2.5">
                           {selectedProject.tech.map((tech, i) => (
-                            <div key={i} title={tech} className="p-2 bg-zinc-900 border border-zinc-700/50 text-zinc-300 rounded-lg transition-all opacity-70 hover:opacity-100 hover:bg-zinc-800">
+                            <div key={i} title={tech} className="rounded-lg border border-zinc-100/10 bg-zinc-900 p-2 text-zinc-300 opacity-75 transition-all hover:border-amber-300/40 hover:bg-zinc-800 hover:opacity-100">
                               {techIcons[tech] || <span className="text-xs font-medium">{tech}</span>}
                             </div>
                           ))}

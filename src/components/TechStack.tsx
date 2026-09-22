@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLocale } from "@/lib/i18n";
 import Image from "next/image";
 import {
   SiDjango,
@@ -88,7 +89,7 @@ function LevelRow({ level, items }: { level: SkillLevel; items: Skill[] }) {
         {items.map((item) => (
           <span
             key={item.name}
-            className="inline-flex items-center gap-1.5 rounded-md border border-zinc-700/60 bg-zinc-900/60 px-2.5 py-1.5 text-xs sm:text-sm text-zinc-100"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-100/10 bg-zinc-950/58 px-2.5 py-1.5 text-xs text-zinc-100 sm:text-sm"
           >
             <span className={item.color}>{item.icon}</span>
             {item.name}
@@ -97,41 +98,40 @@ function LevelRow({ level, items }: { level: SkillLevel; items: Skill[] }) {
       </div>
 
       <div className="relative">
-        <div className="h-1.5 w-full rounded-full bg-zinc-800 overflow-hidden">
+        <div className="h-1.5 w-full overflow-hidden rounded-full bg-zinc-800/80">
           <motion.div
             initial={{ width: 0 }}
             whileInView={{ width: levelWidth[level] }}
             viewport={{ once: true }}
             transition={{ duration: 0.55, ease: "easeOut" }}
-            className="h-full rounded-full bg-gradient-to-r from-orange-500 via-amber-400 to-emerald-400"
+            className="h-full rounded-full bg-amber-400"
           />
         </div>
-        <span className="mt-1 block text-[10px] sm:text-[11px] text-zinc-500 text-right uppercase tracking-wide">{level}</span>
+        <span className="mt-1 block text-right text-[10px] text-zinc-500 sm:text-[11px]">{level}</span>
       </div>
     </div>
   );
 }
 
 export default function TechStack() {
+  const { t } = useLocale();
   const domains: Domain[] = ["Development", "Deployment & Integration"];
 
   return (
-    <section id="tech-stack" className="py-24 px-4 sm:px-8 lg:px-16 xl:px-24 relative z-10 w-full border-t border-slate-200/10">
+    <section id="tech-stack" className="relative z-10 w-full border-t border-zinc-100/10 px-4 py-24 sm:px-8 lg:px-16 xl:px-24">
       <div className="w-full max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.45 }}
-          className="text-center mb-14"
+          className="mb-14 text-center"
         >
-          <h2 className="section-title text-3xl md:text-5xl font-bold mb-4">Tooling That Ships</h2>
-          <p className="muted-copy max-w-2xl mx-auto">
-            Grouped by development and operations so you can scan what I use to build and deliver.
-          </p>
+          <h2 className="section-title mb-4 text-3xl font-bold md:text-5xl">{t.techStack.heading}</h2>
+          <p className="muted-copy max-w-2xl mx-auto">{t.techStack.subtext}</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
           {domains.map((domain, domainIndex) => {
             const domainSkills = skills.filter((skill) => skill.domain === domain);
 
@@ -142,9 +142,9 @@ export default function TechStack() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: domainIndex * 0.1 }}
-                className="glass-panel accent-ring rounded-2xl p-5 sm:p-6"
+                className="glass-panel rounded-2xl p-5 transition-colors hover:border-amber-300/35 hover:shadow-[0_24px_70px_rgba(245,154,61,0.08)] sm:p-6"
               >
-                <h3 className="text-lg sm:text-xl font-semibold text-slate-100 mb-4">{domain}</h3>
+                <h3 className="mb-4 text-lg font-semibold text-zinc-100 sm:text-xl">{domain}</h3>
                 <div className="space-y-4">
                   {levelOrder.map((level) => (
                     <LevelRow key={`${domain}-${level}`} level={level} items={domainSkills.filter((item) => item.level === level)} />

@@ -1,18 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronUp } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence, useMotionValueEvent, useScroll } from "framer-motion";
+import { CaretUp } from "@phosphor-icons/react";
+import { useLocale } from "@/lib/i18n";
 
 export default function BackToTop() {
+  const { t } = useLocale();
   const [visible, setVisible] = useState(false);
+  const { scrollY } = useScroll();
 
-  useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 380);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setVisible(latest > 380);
+  });
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -28,10 +28,10 @@ export default function BackToTop() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 12, scale: 0.92 }}
           transition={{ duration: 0.22 }}
-          className="fixed bottom-16 right-4 sm:bottom-20 sm:right-7 z-[65] h-11 w-11 rounded-full border border-slate-200/20 bg-slate-950/80 text-slate-100 shadow-lg backdrop-blur hover:bg-slate-900 transition-colors flex items-center justify-center"
-          aria-label="Go to top"
+          className="fixed bottom-16 right-4 z-[65] flex h-11 w-11 items-center justify-center rounded-full border border-zinc-100/15 bg-zinc-950/86 text-zinc-100 shadow-lg backdrop-blur transition-colors hover:border-amber-300/50 hover:text-amber-200 sm:bottom-20 sm:right-7"
+          aria-label={t.common.goToTop}
         >
-          <ChevronUp size={18} />
+          <CaretUp size={18} weight="regular" />
         </motion.button>
       )}
     </AnimatePresence>

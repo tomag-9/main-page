@@ -1,21 +1,15 @@
 {
   "name": "Tomáš Magula Portfolio",
-  "short_name": "TOMAG",
+  "short_name": "T. Magula",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#050814",
-  "theme_color": "#050814",
+  "background_color": "#09090b",
+  "theme_color": "#09090b",
   "icons": [
     {
       "src": "/favicon.ico",
       "sizes": "16x16 24x24 32x32 48x48 64x64",
       "type": "image/x-icon"
-    },
-    {
-      "src": "/tomag-icon-square.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any"
     }
   ]
 }

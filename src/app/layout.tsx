@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
-import { Sora, Space_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
+import { LocaleProvider } from "@/lib/i18n";
 import "./globals.css";
-import CustomCursor from "@/components/CustomCursor";
 
-const sora = Sora({
-  variable: "--font-montserrat",
+const geist = Geist({
+  variable: "--font-sans",
   subsets: ["latin"],
 });
 
-const spaceMono = Space_Mono({
-  variable: "--font-space-mono",
-  weight: ["400", "700"],
+const geistMono = Geist_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
 });
 
@@ -28,26 +27,14 @@ export const metadata: Metadata = {
     title: "Tomáš Magula | Fullstack & DevOps Engineer",
     description: "Portfolio of Tomáš Magula, a Fullstack Engineer with a passion for infrastructure and DevOps.",
     siteName: "Tomáš Magula Portfolio",
-    images: [
-      {
-        url: "/tomag-logo-full.svg",
-        width: 1200,
-        height: 630,
-        alt: "Tomáš Magula portfolio",
-      },
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Tomáš Magula | Fullstack & DevOps Engineer",
     description: "Portfolio of Tomáš Magula, a Fullstack Engineer with a passion for infrastructure and DevOps.",
-    images: ["/tomag-logo-full.svg"],
   },
   icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/tomag-icon-square.svg", type: "image/svg+xml", sizes: "76x76" },
-    ],
+    icon: [{ url: "/favicon.ico", sizes: "any" }],
     shortcut: ["/favicon.ico"],
     apple: [{ url: "/favicon.ico" }],
   },
@@ -61,15 +48,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${sora.variable} ${spaceMono.variable} antialiased text-white font-sans selection:bg-cyan-300/40`}
+        className={`${geist.variable} ${geistMono.variable} antialiased text-zinc-50 font-sans selection:bg-amber-400/30`}
       >
-        <div className="fixed inset-0 z-[-1] pointer-events-none">
-          <div className="absolute -top-24 left-[12%] h-[26rem] w-[26rem] rounded-full bg-cyan-400/12 blur-[110px]" />
-          <div className="absolute top-[32%] -right-24 h-[34rem] w-[34rem] rounded-full bg-orange-300/14 blur-[120px]" />
-          <div className="absolute bottom-[-8rem] left-1/2 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-rose-300/10 blur-[130px]" />
-        </div>
-        <CustomCursor />
-        {children}
+        <LocaleProvider>{children}</LocaleProvider>
       </body>
     </html>
   );

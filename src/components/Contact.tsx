@@ -1,39 +1,42 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { GithubLogo, LinkedinLogo, EnvelopeSimple } from "@phosphor-icons/react";
+import { useLocale } from "@/lib/i18n";
 
 const contactLinks = [
   {
     href: "mailto:magula@tomag.xyz",
     label: "magula@tomag.xyz",
-    icon: <Mail size={20} />,
+    icon: <EnvelopeSimple size={20} weight="regular" />,
   },
   {
     href: "https://www.linkedin.com/in/tom%C3%A1%C5%A1-magula-88035120b/",
     label: "LinkedIn",
-    icon: <Linkedin size={20} />,
+    icon: <LinkedinLogo size={20} weight="regular" />,
   },
   {
     href: "https://github.com/magi-9",
     label: "GitHub Projects",
-    icon: <Github size={20} />,
+    icon: <GithubLogo size={20} weight="regular" />,
   },
 ];
 
 export default function Contact() {
+  const { t } = useLocale();
+
   return (
-    <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 relative z-10 border-t border-slate-200/10">
-      <div className="w-full max-w-5xl mx-auto">
+    <section id="contact" className="relative z-10 border-t border-zinc-100/10 px-4 py-20 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="mb-10 text-center"
         >
-          <h2 className="section-title text-3xl md:text-5xl font-bold mb-4">Let&apos;s Build Something Sharp</h2>
-          <p className="muted-copy max-w-2xl mx-auto">Open to software engineering opportunities in Bratislava and remote collaborations.</p>
+          <h2 className="section-title mb-4 text-3xl font-bold md:text-5xl">{t.contact.heading}</h2>
+          <p className="muted-copy max-w-2xl mx-auto">{t.contact.subtext}</p>
         </motion.div>
 
         <motion.div
@@ -41,22 +44,20 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.55 }}
-          className="glass-panel accent-ring rounded-2xl p-6 sm:p-8"
+          className="mx-auto flex max-w-3xl flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap"
         >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            {contactLinks.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                target={item.href.startsWith("http") ? "_blank" : undefined}
-                rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="flex items-center gap-3 rounded-xl bg-slate-950/45 border border-slate-200/15 px-4 py-4 text-slate-100/85 hover:text-white hover:border-cyan-200/60 transition-colors"
-              >
-                <span className="text-orange-300">{item.icon}</span>
-                <span className="text-sm sm:text-base break-all">{item.label}</span>
-              </a>
-            ))}
-          </div>
+          {contactLinks.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              target={item.href.startsWith("http") ? "_blank" : undefined}
+              rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+              className="inline-flex w-full items-center justify-center gap-3 rounded-full border border-zinc-100/10 bg-zinc-900/58 px-5 py-3.5 text-zinc-100/85 transition-colors hover:border-amber-300/50 hover:bg-zinc-900 hover:text-white sm:w-auto"
+            >
+              <span className="text-amber-300">{item.icon}</span>
+              <span className="break-all text-sm sm:text-base">{item.label}</span>
+            </a>
+          ))}
         </motion.div>
       </div>
     </section>
