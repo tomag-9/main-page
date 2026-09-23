@@ -1,52 +1,53 @@
 "use client";
 
-import { Briefcase, Crosshair, EnvelopeSimple } from "@phosphor-icons/react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useLocale } from "@/lib/i18n";
 
-const approachIcons = [
-  <EnvelopeSimple key="listen" size={24} weight="regular" />,
-  <Crosshair key="map" size={24} weight="regular" />,
-  <Briefcase key="build" size={24} weight="regular" />,
-];
+type Props = {
+  active: number;
+  onSelect: (step: number) => void;
+  onInteract: (interacting: boolean) => void;
+};
 
-export default function Approach() {
+export default function Approach({ active, onSelect, onInteract }: Props) {
   const { t } = useLocale();
+  const reduceMotion = useReducedMotion();
 
   return (
-    <section id="approach" className="relative z-10 w-full border-t border-zinc-100/10 px-4 py-24 sm:px-6 lg:px-8">
-      <div className="mx-auto w-full max-w-3xl">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.45 }}
-          className="mb-14 text-center md:mb-16"
-        >
-          <h2 className="section-title mb-4 text-3xl font-bold md:text-5xl">{t.approach.heading}</h2>
-          <p className="muted-copy mx-auto max-w-2xl">{t.approach.subtext}</p>
-        </motion.div>
-
-        <div className="border-b border-zinc-100/10">
-          {t.approach.items.map((item, index) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.45, delay: index * 0.08 }}
-              className="flex flex-col gap-4 border-t border-zinc-100/10 py-7 sm:flex-row sm:gap-6 sm:py-8"
-            >
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-amber-300/25 bg-amber-300/10 text-amber-200">
-                {approachIcons[index]}
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-zinc-50">{item.title}</h3>
-                <p className="muted-copy mt-2 text-sm sm:text-base">{item.description}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+    <section id="approach" className="approach-details scroll-mt-28 pb-20 lg:pb-32" aria-labelledby="approach-heading">
+      <div className="approach-content">
+      <motion.div
+        initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.5 }}
+        className="mb-9"
+      >
+        <p className="mb-4 text-sm font-medium text-amber-200">{t.approach.readMore}</p>
+        <h2 id="approach-heading" className="section-title text-3xl font-semibold leading-tight sm:text-4xl">{t.approach.heading}</h2>
+        <p className="muted-copy mt-5 text-base leading-relaxed">{t.approach.subtext}</p>
+      </motion.div>
+      <div onMouseEnter={() => onInteract(true)} onMouseLeave={(event) => { if (!event.currentTarget.contains(document.activeElement)) onInteract(false); }} onFocus={() => onInteract(true)} onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) onInteract(false); }}>
+        {t.hero.iteration.steps.map((step, index) => (
+          <motion.article
+            key={index}
+            initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.45, delay: index * 0.07 }}
+            className="approach-detail relative py-5 pl-6"
+            data-active={active === index}
+            onMouseEnter={() => onSelect(index)}
+          >
+            <h3><button type="button" onClick={() => onSelect(index)} onFocus={() => onSelect(index)} aria-pressed={active === index} className="group flex items-baseline gap-3 rounded-sm text-left focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-300">
+              <span className="font-mono text-xs text-amber-200/70">0{index + 1}</span>
+              <span className="text-lg font-semibold text-zinc-100 transition-colors group-hover:text-amber-200">{step.title}</span>
+            </button></h3>
+            <p className="mt-3 text-sm leading-7 text-zinc-400 sm:text-base">{step.detail}</p>
+          </motion.article>
+        ))}
+      </div>
+      <p className="mt-7 pl-6 text-sm text-amber-200">{t.hero.iteration.feedback}</p>
       </div>
     </section>
   );

@@ -1,9 +1,8 @@
 "use client";
 
-import Hero from "@/components/Hero";
-import TechStack from "@/components/TechStack";
-import Approach from "@/components/Approach";
+import HeroApproach from "@/components/HeroApproach";
 import Projects from "@/components/Projects";
+import Stack from "@/components/Stack";
 import Experience from "@/components/Experience";
 import Contact from "@/components/Contact";
 import BrandBar from "@/components/BrandBar";
@@ -17,17 +16,28 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       <BrandBar />
-      <Hero />
-      <TechStack />
-      <Approach />
+      <HeroApproach />
       <Projects />
+      <Stack />
       <Experience />
       <Contact />
       <BackToTop />
 
       <footer className="z-10 mt-12 w-full border-t border-zinc-100/10 bg-zinc-950/45 py-8 text-center backdrop-blur-xl">
-        <p className="flex items-center justify-center gap-2 text-zinc-300/75">
-          {t.footer.madeWith} <Coffee size={16} weight="regular" className="text-amber-300" /> {t.footer.madeWithSuffix} &copy; {new Date().getFullYear()}
+        <p className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 px-4 text-zinc-300/75">
+          {"credit" in t.footer ? (
+            <>
+              <span>{t.footer.credit}</span>
+              <Coffee size={16} weight="regular" className="shrink-0 text-amber-300" aria-hidden="true" />
+            </>
+          ) : (
+            <>
+              <span>{t.footer.madeWith}</span>
+              <Coffee size={16} weight="regular" className="shrink-0 text-amber-300" aria-hidden="true" />
+              <span>{t.footer.madeWithSuffix}</span>
+            </>
+          )}
+          <span>&copy; {new Date().getFullYear()}</span>
         </p>
       </footer>
     </main>

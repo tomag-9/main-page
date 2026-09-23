@@ -7,9 +7,9 @@ export type Locale = "en" | "sk";
 export const translations = {
   en: {
     nav: {
-      tech: "Tech",
       approach: "Approach",
       projects: "Projects",
+      stack: "Stack",
       experience: "Journey",
       contact: "Contact",
     },
@@ -19,21 +19,35 @@ export const translations = {
         "I design and build tailored applications for businesses of any size, from first idea to daily operation.",
       ctaPrimary: "View projects",
       ctaSecondary: "Contact",
-      stackLabel: "Primary stack",
-      stackCaption: "design / build / ship",
-    },
-    techStack: {
-      heading: "Tooling That Ships",
-      subtext: "Grouped by development and operations so you can scan what I use to build and deliver.",
+      iteration: {
+        eyebrow: "Built in iterations",
+        heading: "Small steps. Better software.",
+        description: "From an idea to a working version. Your feedback shapes what comes next.",
+        accessibleLabel: "An iterative cycle: design, build, review, then return to design with your feedback.",
+        steps: [
+          { label: "Plan", title: "Define the next step", description: "Agree on what matters most.", detail: "We start with your team and the way your business works. Together, we choose a clear, useful next step and sketch how it should work." },
+          { label: "Build", title: "Build a working version", description: "Turn the plan into something real.", detail: "I build a small, working part of the application. You see progress along the way and get something you can actually try in your daily work." },
+          { label: "Review", title: "Review it together", description: "Try it. Share what could be better.", detail: "We look at what works and what needs adjusting. Your experience shapes the next iteration, so the software keeps getting closer to what you need." },
+        ],
+        feedback: "Your feedback starts the next iteration.",
+        footer: "A little better. Every cycle.",
+        pause: "Pause animation",
+        play: "Play animation",
+      },
     },
     approach: {
       heading: "Software shaped around your business",
+      readMore: "How I work",
       subtext: "Every business works differently. I take the time to understand yours before writing a single line of code.",
       items: [
-        { title: "Listen first", description: "I start with a conversation, not a template. What matters to your team shapes the plan." },
-        { title: "Map the workflow", description: "I study how your business actually runs day to day, then design around that reality." },
-        { title: "Build together", description: "Regular check-ins, not a black box. You see progress and can steer it as we go." },
+        { title: "Listen first", label: "Listen", description: "I start with a conversation, not a template. What matters to your team shapes the plan." },
+        { title: "Map the workflow", label: "Map", description: "I study how your business actually runs day to day, then design around that reality." },
+        { title: "Build together", label: "Build", description: "Regular check-ins, not a black box. You see progress and can steer it as we go." },
       ],
+    },
+    stack: {
+      heading: "Primary stack",
+      subtext: "The tools I reach for most often. My work isn't limited to this list, I adapt the stack to whatever the project actually needs.",
     },
     projects: {
       heading: "Selected Work",
@@ -50,7 +64,7 @@ export const translations = {
         "zdravy-projekt": {
           type: "Food Ordering Application",
           description: "A company application for easier food ordering by schools with many daily users.",
-          fullDescription: "Zdravy-projekt is built for high-volume daily school food ordering. It includes external data API integrations, PWA support, notifications, and operational integrations for scalable day-to-day processing.",
+          fullDescription: "zdravy-projekt is built for high-volume daily school food ordering. It includes external data API integrations, PWA support, notifications, and operational integrations for scalable day-to-day processing.",
         },
         "e-plant": {
           type: "E-Commerce Application",
@@ -107,49 +121,63 @@ export const translations = {
   },
   sk: {
     nav: {
-      tech: "Tech",
       approach: "Prístup",
       projects: "Projekty",
-      experience: "Cesta",
+      stack: "Technológie",
+      experience: "Skúsenosti",
       contact: "Kontakt",
     },
     hero: {
-      headlineRest: "Fullstack developer, ktorý stavia softvér na mieru.",
+      headlineRest: "Vyvíjam webové aplikácie na mieru.",
       subtext: "Navrhujem a staviam aplikácie na mieru pre firmy akejkoľvek veľkosti, od prvého nápadu po každodennú prevádzku.",
       ctaPrimary: "Zobraziť projekty",
       ctaSecondary: "Kontakt",
-      stackLabel: "Hlavný stack",
-      stackCaption: "návrh / vývoj / nasadenie",
-    },
-    techStack: {
-      heading: "Nástroje, ktoré fungujú v praxi",
-      subtext: "Rozdelené podľa vývoja a prevádzky, aby ste rýchlo videli, s čím staviam a nasadzujem.",
+      iteration: {
+        eyebrow: "Vývoj krok za krokom",
+        heading: "Postupne k lepšiemu riešeniu.",
+        description: "Navrhneme riešenie, vytvorím funkčnú verziu a spoločne ju vyskúšame. Podľa vašich skúseností pokračujeme ďalej.",
+        accessibleLabel: "Opakujúci sa postup: návrh, vývoj, spätná väzba a návrh ďalších úprav.",
+        steps: [
+          { label: "Návrh", title: "Dohodneme sa, čo vyriešime", description: "Vyberieme, čo má teraz zmysel.", detail: "Najprv sa porozprávame o tom, ako pracujete a čo vám prácu komplikuje. Spoločne si určíme priority a navrhneme konkrétne riešenie." },
+          { label: "Vývoj", title: "Vytvorím funkčnú verziu", description: "Riešenie si môžete vyskúšať.", detail: "Riešenie vyvíjam po menších častiach. Priebežne vidíte výsledky a nové funkcie si môžete vyskúšať priamo pri práci, ešte pred dokončením celej aplikácie." },
+          { label: "Spätná väzba", title: "Vyskúšame a doladíme", description: "Poviete mi, čo funguje a čo zlepšiť.", detail: "Spoločne prejdeme vaše skúsenosti s používaním. Zistíme, čo funguje, čo treba upraviť a čo doplniť. Podľa toho naplánujeme ďalší krok." },
+        ],
+        feedback: "Podľa vašej spätnej väzby naplánujeme ďalší krok.",
+        footer: "Každá verzia posúva riešenie ďalej.",
+        pause: "Pozastaviť animáciu",
+        play: "Spustiť animáciu",
+      },
     },
     approach: {
-      heading: "Softvér na mieru vášho biznisu",
-      subtext: "Každá firma funguje inak. Najprv si nájdem čas pochopiť tú vašu, až potom začínam písať kód.",
+      heading: "Softvér, ktorý sa prispôsobí vašej práci",
+      readMore: "Ako pracujem",
+      subtext: "Každá firma funguje inak. Preto najprv spoznám tú vašu a riešenie rozvíjam postupne, podľa toho, čo v praxi potrebujete.",
       items: [
-        { title: "Najprv počúvam", description: "Začínam rozhovorom, nie šablónou. Plán staviam na tom, čo je dôležité pre váš tím." },
-        { title: "Zmapujem workflow", description: "Zistím, ako vaša firma reálne funguje deň čo deň, a podľa toho appku navrhnem." },
-        { title: "Staviame spolu", description: "Pravidelné konzultácie, žiadna čierna skrinka. Vidíte priebeh a viete ho ovplyvniť." },
+        { title: "Najprv sa porozprávame", label: "Rozhovor", description: "Zaujíma ma, ako pracujete, čo vám chýba a čo by vášmu tímu uľahčilo deň." },
+        { title: "Spoznám vaše pracovné postupy", label: "Návrh", description: "Pozriem sa, ako vaša firma funguje v praxi, a podľa toho navrhnem aplikáciu." },
+        { title: "Riešenie priebežne ladíme", label: "Spolupráca", description: "Pravidelne vám ukazujem výsledky. Môžete si ich vyskúšať a ovplyvniť ďalší vývoj." },
       ],
+    },
+    stack: {
+      heading: "Technológie, s ktorými pracujem",
+      subtext: "Toto sú technológie, ktoré používam najčastejšie. Pre každý projekt vyberám tie, ktoré najlepšie zodpovedajú jeho potrebám.",
     },
     projects: {
       heading: "Vybrané projekty",
-      subtext: "Projekty naprieč produktovým vývojom, automatizáciou a interaktívnymi aplikáciami.",
-      inProgress: "Prebieha",
-      clickToExpand: "Kliknite pre detail",
+      subtext: "Výber aplikácií a nástrojov, na ktorých pracujem alebo som pracoval.",
+      inProgress: "Vo vývoji",
+      clickToExpand: "Zobraziť detail",
       overview: "Prehľad",
       links: "Odkazy",
       sourceCode: "Zdrojový kód",
       thesis: "Bakalárska práca",
-      liveApplication: "Živá aplikácia",
+      liveApplication: "Otvoriť aplikáciu",
       techStackLabel: "Technológie",
       items: {
         "zdravy-projekt": {
           type: "Aplikácia na objednávanie jedla",
           description: "Firemná aplikácia na jednoduchšie objednávanie jedla pre školy s vysokou dennou návštevnosťou.",
-          fullDescription: "Zdravý projekt je postavený pre objednávanie jedla vo veľkom objeme pre školy. Zahŕňa integrácie s externými API, podporu PWA, notifikácie a prevádzkové integrácie pre škálovateľné každodenné spracovanie.",
+          fullDescription: "zdravy-projekt spracúva každodenné objednávky jedla pre školy. Aplikácia prepája externé API, podporuje inštaláciu ako PWA a posiela upozornenia. Je navrhnutá na spracovanie veľkého počtu objednávok.",
         },
         "e-plant": {
           type: "E-commerce aplikácia",
@@ -169,13 +197,13 @@ export const translations = {
       },
     },
     experience: {
-      heading: "Cesta a vývoj",
-      subtext: "Vzdelanie, tlak z ostrej prevádzky a dodávanie produktov spojené do jedného prístupu k inžinierstvu.",
+      heading: "Skúsenosti a vzdelanie",
+      subtext: "Pri vývoji spájam štúdium informatiky so skúsenosťami z reálnych projektov a živého vysielania.",
       items: {
         freelance: {
           role: "Softvérový inžinier",
           company: "Freelance a produktový vývoj",
-          description: "Staviam fullstack softvérové produkty od architektúry po nasadenie, s dôrazom na stabilné vydania, čisté CI/CD procesy a praktickú DevOps automatizáciu.",
+          description: "Vyvíjam aplikácie od návrhu architektúry po nasadenie. Venujem sa frontendu aj backendu, automatizácii nasadzovania a spoľahlivej prevádzke.",
         },
         university: {
           role: "Študent informatiky",
@@ -184,19 +212,18 @@ export const translations = {
           description: "Bakalárske a magisterské štúdium informatiky so zameraním na praktické softvérové inžinierstvo, cloud computing, distribuované systémy a návrh systémov.",
         },
         tvjoj: {
-          role: "Broadcast technológie a živá produkcia",
+          role: "Technológie živého vysielania",
           company: "TV JOJ",
-          description: "Réžia streamu, réžia opakovaných záberov, grafika a softvérové nástroje pre živú športovú produkciu. Staviam automatizačné nástroje a real-time workflow pod tlakom vysielania naživo.",
+          description: "Pri živých športových prenosoch sa venujem réžii streamu, opakovaným záberom a grafike. Vyvíjam aj nástroje, ktoré automatizujú prácu počas vysielania.",
         },
       },
     },
     contact: {
-      heading: "Postavme niečo poriadne",
-      subtext: "Otvorený pre vývoj softvéru na mieru pre firmy akejkoľvek veľkosti, v Bratislave aj na diaľku.",
+      heading: "Poďme vytvoriť niečo užitočné",
+      subtext: "Máte nápad na aplikáciu alebo potrebujete zlepšiť existujúcu? Ozvite sa mi. Spolupracujem osobne aj na diaľku.",
     },
     footer: {
-      madeWith: "Navrhnuté a postavené s",
-      madeWithSuffix: "Tomášom Magulom.",
+      credit: "Navrhol a vytvoril Tomáš Magula.",
     },
     common: {
       toggleMenu: "Prepnúť menu",
@@ -222,19 +249,29 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
 
     try {
       const storedLocale = localStorage.getItem("locale");
-      if (storedLocale === "en" || storedLocale === "sk") {
-        queueMicrotask(() => {
-          if (active) {
-            setLocaleState(storedLocale);
-          }
-        });
-      }
+      const browserLanguage = navigator.language || navigator.languages?.[0] || "";
+      const nextLocale: Locale =
+        storedLocale === "en" || storedLocale === "sk"
+          ? storedLocale
+          : browserLanguage.toLowerCase().startsWith("sk")
+            ? "sk"
+            : "en";
+
+      queueMicrotask(() => {
+        if (active) {
+          setLocaleState(nextLocale);
+        }
+      });
     } catch {}
 
     return () => {
       active = false;
     };
   }, []);
+
+  useEffect(() => {
+    document.documentElement.lang = locale;
+  }, [locale]);
 
   const setLocale = (nextLocale: Locale) => {
     setLocaleState(nextLocale);

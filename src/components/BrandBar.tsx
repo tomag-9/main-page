@@ -1,15 +1,15 @@
 "use client";
 
-import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
+import { motion, AnimatePresence, useMotionValueEvent, useScroll, useSpring } from "framer-motion";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { List, X } from "@phosphor-icons/react";
 import { type Locale, useLocale } from "@/lib/i18n";
 
 const navLinks = [
-  { href: "#tech-stack", labelKey: "tech", id: "tech-stack" },
   { href: "#approach", labelKey: "approach", id: "approach" },
   { href: "#projects", labelKey: "projects", id: "projects" },
+  { href: "#stack", labelKey: "stack", id: "stack" },
   { href: "#experience", labelKey: "experience", id: "experience" },
   { href: "#contact", labelKey: "contact", id: "contact" },
 ] as const;
@@ -45,26 +45,45 @@ export default function BrandBar() {
   const { t } = useLocale();
   const [activeSection, setActiveSection] = useState<string>("");
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { scrollYProgress } = useScroll();
+  const { scrollY, scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 40 });
+  const activeSectionRef = useRef("");
 
-  useEffect(() => {
+  const updateActiveSection = useCallback(() => {
     const sections = navLinks
       .map((l) => document.getElementById(l.id))
       .filter(Boolean) as HTMLElement[];
+    const position = scrollY.get();
+    const activationLine = Math.max(96, window.innerHeight * 0.35);
+    const atBottom = position > 4 && position + window.innerHeight >= document.documentElement.scrollHeight - 4;
+    let nextSection = "";
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActiveSection(entry.target.id);
-        });
-      },
-      { rootMargin: "-30% 0px -60% 0px" }
-    );
+    // Recompute from every section so jumps and reverse scrolling cannot leave stale state.
+    if (atBottom) {
+      nextSection = sections.at(-1)?.id ?? "";
+    } else if (position > 4) {
+      for (const section of sections) {
+        if (section.getBoundingClientRect().top <= activationLine) nextSection = section.id;
+      }
+    }
 
-    sections.forEach((s) => observer.observe(s));
-    return () => observer.disconnect();
-  }, []);
+    if (nextSection !== activeSectionRef.current) {
+      activeSectionRef.current = nextSection;
+      setActiveSection(nextSection);
+    }
+  }, [scrollY]);
+
+  useMotionValueEvent(scrollY, "change", updateActiveSection);
+
+  useEffect(() => {
+    const observer = new ResizeObserver(updateActiveSection);
+    observer.observe(document.body);
+    window.addEventListener("resize", updateActiveSection);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updateActiveSection);
+    };
+  }, [updateActiveSection]);
 
   return (
     <motion.header
@@ -88,6 +107,7 @@ export default function BrandBar() {
             <Link
               key={link.id}
               href={link.href}
+              aria-current={activeSection === link.id ? "location" : undefined}
               className={`relative py-1 transition-colors duration-200 ${
                 activeSection === link.id ? "text-amber-200" : "hover:text-amber-200"
               }`}
@@ -143,6 +163,7 @@ export default function BrandBar() {
                 >
                   <Link
                     href={link.href}
+                    aria-current={activeSection === link.id ? "location" : undefined}
                     onClick={() => setMobileOpen(false)}
                     className={`text-sm font-medium transition-colors ${
                       activeSection === link.id

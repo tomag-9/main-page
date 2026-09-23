@@ -62,7 +62,7 @@ type Project = {
 const projects: Project[] = [
   {
     id: "zdravy-projekt",
-    title: "Zdravy-projekt",
+    title: "zdravy-projekt",
     tech: ["Django", "Swarm", "Redis", "Celery", "GitHub Actions", "Traefik", "Prometheus", "Grafana", "Sentry"],
     github: null,
     live: null,
@@ -76,7 +76,7 @@ const projects: Project[] = [
       "/projects/zdravy-projekt/login-desktop.png",
       "/projects/zdravy-projekt/order-mobile.png",
     ],
-    ongoing: true,
+    ongoing: false,
   },
   {
     id: "e-plant",
@@ -94,7 +94,7 @@ const projects: Project[] = [
       "/projects/e-plant/mobile-product.png",
       "/projects/e-plant/mobile-filtered.png",
     ],
-    ongoing: true,
+    ongoing: false,
   },
   {
     id: "eventer",
