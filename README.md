@@ -44,3 +44,14 @@ The app listens on port `3000` inside the container and is exposed internally fo
 Planned public domain: `tomag.xyz`.
 
 Configure this in Dokploy/Traefik and point DNS to the server running Dokploy.
+
+## Cloudflare Workers
+
+The Cloudflare Worker uses OpenNext. In Cloudflare Workers build settings, set:
+
+```text
+Build command: npm run build:cloudflare
+Deploy command: npx wrangler deploy
+```
+
+For a deployment from an authenticated local machine, run `npm run deploy`.
