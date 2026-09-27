@@ -1,57 +1,98 @@
-# Main Page
+# Tomáš Magula — portfolio
 
-Portfolio website built with Next.js 16, React 19, Tailwind CSS 4, and Framer Motion.
+Portfolio v Next.js 16, React 19, Tailwind CSS 4 a Framer Motion. Projekt sa
+exportuje ako statická stránka a nasadzuje na **Cloudflare Pages**. Nepotrebuje
+Next.js server, Pages Functions ani samostatný Cloudflare Worker.
 
-## Local Development
-
-Run with Docker (Next.js dev server + local nginx proxy on port 3000):
-
-```bash
-docker compose up --build -d
-```
-
-Or run directly without Docker:
+## Lokálny vývoj
 
 ```bash
-npm install
+npm ci
 npm run dev
 ```
 
-## Production Setup (Dokploy + Traefik)
+Vývojový server beží na `http://localhost:3000`.
 
-This repository includes a dedicated production compose file with:
-
-- one application service only
-- no nginx proxy container
-- no routing config inside compose
-
-Traefik routing and TLS are expected to be handled by Dokploy.
-
-Production compose file:
-
-- `docker-compose.prod.yml`
-
-To test production locally:
+Produkčný build a lokálna kontrola cez Cloudflare Pages runtime:
 
 ```bash
-docker compose -f docker-compose.prod.yml up --build -d
+npm run preview
 ```
 
-The app listens on port `3000` inside the container and is exposed internally for reverse proxying.
+`next build` vytvorí priečinok `out/`. Práve jeho obsah sa publikuje.
 
-## Domain
+## Prvé nasadenie cez Cloudflare dashboard (odporúčané)
 
-Planned public domain: `tomag.xyz`.
+1. Pushni tento repozitár na GitHub alebo GitLab.
+2. V Cloudflare otvor **Workers & Pages → Create application → Pages → Connect
+   to Git** a vyber repozitár.
+3. Nastav:
 
-Configure this in Dokploy/Traefik and point DNS to the server running Dokploy.
+   | Pole | Hodnota |
+   | --- | --- |
+   | Project name | `main-page` (alebo iný voľný názov) |
+   | Production branch | `main` |
+   | Framework preset | `Next.js (Static HTML Export)` alebo `None` |
+   | Build command | `npm run build` |
+   | Build output directory | `out` |
+   | Root directory | nechaj prázdne |
 
-## Cloudflare Workers
+4. Nepoužívaj `npm run deploy` ako build ani deploy command v Git integrácii.
+   Pages po buildnutí automaticky publikuje obsah `out/`.
+5. Projekt momentálne nepotrebuje žiadne environment variables, bindings ani
+   compatibility flags.
+6. Klikni **Save and Deploy**. Každý ďalší push do `main` spraví produkčný
+   deploy; ostatné branche dostanú preview URL.
 
-The Cloudflare Worker uses OpenNext. In Cloudflare Workers build settings, set:
+Odporúčaná verzia Node.js je 22. Ak ju treba vynútiť, v **Settings →
+Environment variables** pridaj build premennú `NODE_VERSION=22` pre Production
+aj Preview.
 
-```text
-Build command: npm run build:cloudflare
-Deploy command: npx wrangler deploy
+## Doména `tomag.xyz`
+
+1. V Pages projekte otvor **Custom domains → Set up a domain**.
+2. Zadaj `tomag.xyz` a dokonči sprievodcu. Apex doména musí byť v tom istom
+   Cloudflare účte a používať Cloudflare nameservery.
+3. Voliteľne pridaj aj `www.tomag.xyz`; v **Rules → Redirect Rules** ho môžeš
+   presmerovať na `https://tomag.xyz`.
+4. Ak doména doteraz smerovala na Dokploy/Traefik alebo starý Worker, odstráň
+   konfliktný `A`, `AAAA`, `CNAME` alebo Worker route až po tom, čo si overíš,
+   že ide o staré smerovanie. Doménu vždy najprv pridaj cez Pages UI — samotný
+   ručne vytvorený CNAME nestačí.
+
+## Manuálny deploy z terminálu
+
+Git integrácia je bežný produkčný postup. Jednorazovo sa dá deploynúť aj priamo:
+
+```bash
+npx wrangler login
+npm run deploy
 ```
 
-For a deployment from an authenticated local machine, run `npm run deploy`.
+Konfigurácia je vo `wrangler.jsonc`; `npm run deploy` najprv vytvorí `out/` a
+potom ho odošle do Pages projektu `main-page`. Ak už Cloudflare projekt používa
+iný názov, uprav `name` vo `wrangler.jsonc` tak, aby sa presne zhodoval.
+
+## Prečo tu nie je Worker
+
+Všetok obsah sa dá vytvoriť počas buildu. Prepínanie jazyka, animácie a modálne
+okná bežia v prehliadači; `robots.txt` a `sitemap.xml` sa vygenerujú do `out/`.
+Worker alebo Pages Function bude potrebný až pri serverovej funkcionalite, napr.
+API route, SSR, autentifikácii, spracovaní kontaktného formulára alebo práci s
+D1/KV/R2. Vtedy treba znovu zvoliť serverový deployment (napr. OpenNext na
+Workers), nie miešať ho s týmto statickým Pages setupom.
+
+## Rýchla diagnostika
+
+Pred pushom spusti:
+
+```bash
+npm ci
+npm run lint
+npm run build
+```
+
+Úspešný build musí vytvoriť `out/index.html`, `out/robots.txt` a
+`out/sitemap.xml`. Ak Cloudflare hlási, že nenašiel výstup, skontroluj najmä
+`Build output directory = out`. Ak log spomína `.open-next/worker.js` alebo
+`opennextjs-cloudflare`, Pages projekt stále používa starý build/deploy command.
