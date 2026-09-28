@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence, useMotionValueEvent, useScroll, useSpring } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { List, X } from "@phosphor-icons/react";
@@ -98,8 +99,19 @@ export default function BrandBar() {
       />
 
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
-        <Link href="#" className="text-base font-semibold tracking-tight text-zinc-50 sm:text-lg">
-          Tomáš<span className="text-amber-300">.</span>Magula
+        <Link
+          href="#"
+          aria-label="Tomáš Magula, home"
+          className="rounded-sm transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber-300"
+        >
+          <Image
+            src="/brand/tm-mark.svg"
+            alt="Tomáš Magula"
+            width={112}
+            height={64}
+            priority
+            className="h-8 w-auto"
+          />
         </Link>
 
         <div className="hidden items-center gap-5 text-sm text-zinc-300 md:flex lg:gap-6">

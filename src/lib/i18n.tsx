@@ -249,13 +249,13 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
 
     try {
       const storedLocale = localStorage.getItem("locale");
-      const browserLanguage = navigator.language || navigator.languages?.[0] || "";
+      const browserLocale = [...(navigator.languages ?? []), navigator.language]
+        .map((language) => language.toLowerCase().split("-")[0])
+        .find((language): language is Locale => language === "en" || language === "sk");
       const nextLocale: Locale =
         storedLocale === "en" || storedLocale === "sk"
           ? storedLocale
-          : browserLanguage.toLowerCase().startsWith("sk")
-            ? "sk"
-            : "en";
+          : browserLocale ?? "en";
 
       queueMicrotask(() => {
         if (active) {

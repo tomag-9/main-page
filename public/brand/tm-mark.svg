@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 256" role="img" aria-labelledby="title desc">
+  <title id="title">T.M, Tomáš Magula</title>
+  <desc id="desc">Compact white T and M monogram with a square amber dot.</desc>
+
+  <!-- T -->
+  <path fill="#F4F4F5" d="M24 36h166v46h-58v138H82V82H24z"/>
+
+  <!-- Square punctuation mark -->
+  <path fill="#FCD34D" d="M160 176h40v40h-40z"/>
+
+  <!-- M -->
+  <path fill="#F4F4F5" d="M207 36h58l37 105 37-105h61v184h-49V110l-32 110h-35l-29-108v108h-48z"/>
+</svg>

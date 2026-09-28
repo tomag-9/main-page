@@ -18,8 +18,18 @@ const personJsonLd = {
   "@type": "Person",
   name: "Tomáš Magula",
   jobTitle: "Fullstack Developer",
+  description:
+    "Fullstack developer who designs and builds custom web applications, business software, integrations, and automation.",
   url: "https://tomag.xyz",
+  image: "https://tomag.xyz/brand/tm-mark.png",
   email: "mailto:magula@tomag.xyz",
+  knowsAbout: [
+    "Fullstack development",
+    "Custom web applications",
+    "Business software",
+    "Software integrations",
+    "DevOps automation",
+  ],
   sameAs: [
     "https://www.linkedin.com/in/tom%C3%A1%C5%A1-magula-88035120b/",
     "https://github.com/magi-9",
@@ -28,23 +38,60 @@ const personJsonLd = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://tomag.xyz"),
-  title: "Tomáš Magula | Fullstack Developer",
-  description: "Tomáš Magula builds custom software for businesses of any size, from first idea to daily operation.",
+  applicationName: "Tomáš Magula Portfolio",
+  title: "Tomáš Magula | Fullstack Developer & Custom Software",
+  description:
+    "Fullstack developer building custom web applications, business software, integrations, and automation from first idea to reliable operation.",
+  keywords: [
+    "Tomáš Magula",
+    "fullstack developer",
+    "custom software development",
+    "web application development",
+    "business software",
+    "Bratislava developer",
+  ],
+  authors: [{ name: "Tomáš Magula", url: "https://tomag.xyz" }],
+  creator: "Tomáš Magula",
+  publisher: "Tomáš Magula",
+  category: "technology",
   manifest: "/site.webmanifest",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
     url: "https://tomag.xyz",
-    title: "Tomáš Magula | Fullstack Developer",
-    description: "Tomáš Magula builds custom software for businesses of any size, from first idea to daily operation.",
+    title: "Tomáš Magula | Fullstack Developer & Custom Software",
+    description:
+      "Custom web applications, business software, integrations, and automation built from idea to reliable operation.",
     siteName: "Tomáš Magula Portfolio",
+    locale: "en_US",
+    images: [
+      {
+        url: "/brand/tm-mark.png",
+        width: 1024,
+        height: 585,
+        alt: "T.M logo for Tomáš Magula, fullstack developer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tomáš Magula | Fullstack Developer",
-    description: "Tomáš Magula builds custom software for businesses of any size, from first idea to daily operation.",
+    title: "Tomáš Magula | Fullstack Developer & Custom Software",
+    description:
+      "Custom web applications, business software, integrations, and automation built from idea to reliable operation.",
+    images: ["/brand/tm-mark.png"],
   },
   icons: {
     icon: [{ url: "/favicon.ico", sizes: "any" }],
