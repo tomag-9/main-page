@@ -1,3 +1,4 @@
+// app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { LocaleProvider } from "@/lib/i18n";
@@ -79,9 +80,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/brand/tm-mark.png",
-        width: 1024,
-        height: 585,
+        url: "https://tomag.xyz/brand/tm-mark.png",
+        width: 1200,
+        height: 630,
         alt: "T.M logo for Tomáš Magula, fullstack developer",
       },
     ],
@@ -91,7 +92,7 @@ export const metadata: Metadata = {
     title: "Tomáš Magula | Fullstack Developer & Custom Software",
     description:
       "Custom web applications, business software, integrations, and automation built from idea to reliable operation.",
-    images: ["/brand/tm-mark.png"],
+    images: ["https://tomag.xyz/brand/tm-mark.png"],
   },
   icons: {
     icon: [{ url: "/favicon.ico", sizes: "any" }],
