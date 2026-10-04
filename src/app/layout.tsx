@@ -21,8 +21,8 @@ const personJsonLd = {
   jobTitle: "Fullstack Developer",
   description:
     "Fullstack developer who designs and builds custom web applications, business software, integrations, and automation.",
-  url: "https://tomag.xyz",
   image: "https://tomag.xyz/brand/tm-mark.png",
+  url: "https://tomag.xyz",
   email: "mailto:magula@tomag.xyz",
   knowsAbout: [
     "Fullstack development",
@@ -35,6 +35,21 @@ const personJsonLd = {
     "https://www.linkedin.com/in/tom%C3%A1%C5%A1-magula-88035120b/",
     "https://github.com/magi-9",
   ],
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Tomáš Magula",
+  url: "https://tomag.xyz/",
+  description:
+    "Portfolio of Tomáš Magula, a fullstack developer building custom software, integrations, and automation.",
+  inLanguage: ["en", "sk"],
+  publisher: {
+    "@type": "Person",
+    name: "Tomáš Magula",
+    url: "https://tomag.xyz/",
+  },
 };
 
 export const metadata: Metadata = {
@@ -80,10 +95,10 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "https://tomag.xyz/brand/tm-mark.png",
+        url: "https://tomag.xyz/brand/og-image.png",
         width: 1200,
         height: 630,
-        alt: "T.M logo for Tomáš Magula, fullstack developer",
+        alt: "Tomáš Magula, fullstack developer",
       },
     ],
   },
@@ -92,12 +107,12 @@ export const metadata: Metadata = {
     title: "Tomáš Magula | Fullstack Developer & Custom Software",
     description:
       "Custom web applications, business software, integrations, and automation built from idea to reliable operation.",
-    images: ["https://tomag.xyz/brand/tm-mark.png"],
+    images: ["https://tomag.xyz/brand/og-image.png"],
   },
   icons: {
-    icon: [{ url: "/favicon.ico", sizes: "any" }],
-    shortcut: ["/favicon.ico"],
-    apple: [{ url: "/favicon.ico" }],
+    icon: [{ url: "/brand/tm-mark.png", type: "image/png", sizes: "1024x585" }],
+    shortcut: ["/brand/tm-mark.png"],
+    apple: [{ url: "/brand/tm-mark.png", sizes: "1024x585" }],
   },
 };
 
@@ -114,6 +129,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
         <LocaleProvider>{children}</LocaleProvider>
       </body>

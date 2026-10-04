@@ -1,0 +1,30 @@
+# Tomáš Magula
+
+> Tomáš Magula is a fullstack developer based in Bratislava, building custom web applications, business software, integrations, and automation.
+
+## About
+
+- Website: https://tomag.xyz/
+- Role: Fullstack Developer
+- Location: Bratislava, Slovakia; available remotely
+- Email: magula@tomag.xyz
+
+## Services
+
+- Custom web application development
+- Business software and internal tools
+- Software integrations and automation
+- DevOps and reliable deployment workflows
+
+## Site sections
+
+- Portfolio and approach: https://tomag.xyz/#approach
+- Projects: https://tomag.xyz/#projects
+- Technology stack: https://tomag.xyz/#stack
+- Experience: https://tomag.xyz/#experience
+- Contact: https://tomag.xyz/#contact
+
+## Profiles
+
+- LinkedIn: https://www.linkedin.com/in/tom%C3%A1%C5%A1-magula-88035120b/
+- GitHub: https://github.com/magi-9
