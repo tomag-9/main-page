@@ -95,7 +95,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "https://tomag.xyz/brand/og-image.png",
+        url: "https://tomag.xyz/brand/og-image-v2.png",
         width: 1200,
         height: 630,
         alt: "Tomáš Magula, fullstack developer",
@@ -107,7 +107,7 @@ export const metadata: Metadata = {
     title: "Tomáš Magula | Fullstack Developer & Custom Software",
     description:
       "Custom web applications, business software, integrations, and automation built from idea to reliable operation.",
-    images: ["https://tomag.xyz/brand/og-image.png"],
+    images: ["https://tomag.xyz/brand/og-image-v2.png"],
   },
   icons: {
     icon: [{ url: "/brand/tm-mark.png", type: "image/png", sizes: "1024x585" }],
