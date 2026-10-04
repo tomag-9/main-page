@@ -43,13 +43,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/api/content`,
+      url: `${baseUrl}/content.json`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/api/text`,
+      url: `${baseUrl}/content.txt`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.7,
