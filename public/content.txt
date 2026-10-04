@@ -1,0 +1,95 @@
+# Tomáš Magula - Portfolio Content
+
+## English (EN)
+
+nav.approach: Approach
+nav.projects: Projects
+nav.stack: Stack
+nav.experience: Journey
+nav.contact: Contact
+
+hero.headlineRest: Fullstack developer building custom software.
+hero.subtext: I design and build tailored applications for businesses of any size, from first idea to daily operation.
+hero.ctaPrimary: View projects
+hero.ctaSecondary: Contact
+
+projects.heading: Selected Work
+projects.subtext: Projects across product engineering, automation, and interactive applications.
+
+projects.items.zdravy-projekt.type: Food Ordering Application
+projects.items.zdravy-projekt.description: A company application for easier food ordering by schools with many daily users.
+projects.items.zdravy-projekt.fullDescription: zdravy-projekt is built for high-volume daily school food ordering. It includes external data API integrations, PWA support, notifications, and operational integrations for scalable day-to-day processing.
+
+projects.items.e-plant.type: E-Commerce Application
+projects.items.e-plant.description: An e-commerce app for selling dental implants and courses.
+projects.items.e-plant.fullDescription: e-plant is an e-commerce platform for dental implants and courses. It includes warehouse workflows, notifications, and integrations with accounting software and shipping companies.
+
+projects.items.eventer.type: Redmine Plugin
+projects.items.eventer.description: Automated task assignment plugin for Redmine based on qualifications and availability.
+projects.items.eventer.fullDescription: Eventer is an automation-focused Redmine plugin that helps assign tasks to suitable team members. The aim is better project flow, less manual management work, and consistent assignment logic.
+
+projects.items.quizwizz.type: UI/UX Application
+projects.items.quizwizz.description: A UI/UX-focused interactive quiz platform with instant scoring, real-time competition, and admin controls.
+projects.items.quizwizz.fullDescription: QuizWizz is primarily a UI/UX-driven application focused on fast interaction, clear navigation, and polished user flows for quiz sessions, scoring, and administration.
+
+experience.heading: Journey & Momentum
+experience.subtext: Education, production pressure, and product delivery combined into one engineering approach.
+
+experience.items.freelance.role: Software Engineer
+experience.items.freelance.company: Freelance & Product Development
+experience.items.freelance.description: Building fullstack software products from architecture to deployment, with focus on stable releases, clean CI/CD flows, and practical DevOps automation.
+
+experience.items.tvjoj.role: Broadcast Technology & Live Production
+experience.items.tvjoj.company: TV JOJ
+experience.items.tvjoj.description: Stream directing, replay operations, graphics, and software tooling for live sports production. Built automation utilities and real-time workflows under high-pressure broadcast conditions.
+
+contact.heading: Let's Build Something Sharp
+contact.subtext: Open to building custom software for businesses of any size, in Bratislava or remote.
+
+---
+
+## Slovak (SK)
+
+nav.approach: Prístup
+nav.projects: Projekty
+nav.stack: Technológie
+nav.experience: Skúsenosti
+nav.contact: Kontakt
+
+hero.headlineRest: Vyvíjam webové aplikácie na mieru.
+hero.subtext: Navrhujem a staviam aplikácie na mieru pre firmy akejkoľvek veľkosti, od prvého nápadu po každodennú prevádzku.
+hero.ctaPrimary: Zobraziť projekty
+hero.ctaSecondary: Kontakt
+
+projects.heading: Vybrané projekty
+projects.subtext: Výber aplikácií a nástrojov, na ktorých pracujem alebo som pracoval.
+
+projects.items.zdravy-projekt.type: Aplikácia na objednávanie jedla
+projects.items.zdravy-projekt.description: Firemná aplikácia na jednoduchšie objednávanie jedla pre školy s vysokou dennou návštevnosťou.
+projects.items.zdravy-projekt.fullDescription: zdravy-projekt spracúva každodenné objednávky jedla pre školy. Aplikácia prepája externé API, podporuje inštaláciu ako PWA a posiela upozornenia. Je navrhnutá na spracovanie veľkého počtu objednávok.
+
+projects.items.e-plant.type: E-commerce aplikácia
+projects.items.e-plant.description: E-commerce aplikácia na predaj dentálnych implantátov a kurzov.
+projects.items.e-plant.fullDescription: e-plant je e-commerce platforma pre dentálne implantáty a kurzy. Zahŕňa skladové procesy, notifikácie a integrácie s účtovným softvérom a prepravnými spoločnosťami.
+
+projects.items.eventer.type: Redmine plugin
+projects.items.eventer.description: Plugin pre Redmine na automatické priraďovanie úloh podľa kvalifikácie a dostupnosti.
+projects.items.eventer.fullDescription: Eventer je plugin pre Redmine zameraný na automatizáciu, ktorý pomáha priraďovať úlohy vhodným členom tímu. Cieľom je plynulejší priebeh projektu, menej manuálnej práce a konzistentná logika priraďovania.
+
+projects.items.quizwizz.type: UI/UX aplikácia
+projects.items.quizwizz.description: Interaktívna kvízová platforma zameraná na UI/UX s okamžitým vyhodnotením, súťažou v reálnom čase a administráciou.
+projects.items.quizwizz.fullDescription: QuizWizz je aplikácia zameraná predovšetkým na UI/UX, s dôrazom na rýchlu interakciu, prehľadnú navigáciu a doladené flow pre kvízy, vyhodnotenie a administráciu.
+
+experience.heading: Skúsenosti a vzdelanie
+experience.subtext: Pri vývoji spájam štúdium informatiky so skúsenosťami z reálnych projektov a živého vysielania.
+
+experience.items.freelance.role: Softvérový inžinier
+experience.items.freelance.company: Freelance a produktový vývoj
+experience.items.freelance.description: Vyvíjam aplikácie od návrhu architektúry po nasadenie. Venujem sa frontendu aj backendu, automatizácii nasadzovania a spoľahlivej prevádzke.
+
+experience.items.tvjoj.role: Technológie živého vysielania
+experience.items.tvjoj.company: TV JOJ
+experience.items.tvjoj.description: Pri živých športových prenosoch sa venujem réžii streamu, opakovaným záberom a grafike. Vyvíjam aj nástroje, ktoré automatizujú prácu počas vysielania.
+
+contact.heading: Poďme vytvoriť niečo užitočné
+contact.subtext: Máte nápad na aplikáciu alebo potrebujete zlepšiť existujúcu? Ozvite sa mi. Spolupracujem osobne aj na diaľku.

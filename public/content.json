@@ -1,0 +1,132 @@
+{
+  "meta": {
+    "site": "tomag.xyz",
+    "author": "Tomáš Magula",
+    "languages": ["en", "sk"],
+    "updatedAt": "2026-10-05T00:00:00.000Z"
+  },
+  "content": {
+    "en": {
+      "nav": {
+        "approach": "Approach",
+        "projects": "Projects",
+        "stack": "Stack",
+        "experience": "Journey",
+        "contact": "Contact"
+      },
+      "hero": {
+        "headlineRest": "Fullstack developer building custom software.",
+        "subtext": "I design and build tailored applications for businesses of any size, from first idea to daily operation.",
+        "ctaPrimary": "View projects",
+        "ctaSecondary": "Contact"
+      },
+      "projects": {
+        "heading": "Selected Work",
+        "subtext": "Projects across product engineering, automation, and interactive applications.",
+        "items": {
+          "zdravy-projekt": {
+            "type": "Food Ordering Application",
+            "description": "A company application for easier food ordering by schools with many daily users.",
+            "fullDescription": "zdravy-projekt is built for high-volume daily school food ordering. It includes external data API integrations, PWA support, notifications, and operational integrations for scalable day-to-day processing."
+          },
+          "e-plant": {
+            "type": "E-Commerce Application",
+            "description": "An e-commerce app for selling dental implants and courses.",
+            "fullDescription": "e-plant is an e-commerce platform for dental implants and courses. It includes warehouse workflows, notifications, and integrations with accounting software and shipping companies."
+          },
+          "eventer": {
+            "type": "Redmine Plugin",
+            "description": "Automated task assignment plugin for Redmine based on qualifications and availability.",
+            "fullDescription": "Eventer is an automation-focused Redmine plugin that helps assign tasks to suitable team members. The aim is better project flow, less manual management work, and consistent assignment logic."
+          },
+          "quizwizz": {
+            "type": "UI/UX Application",
+            "description": "A UI/UX-focused interactive quiz platform with instant scoring, real-time competition, and admin controls.",
+            "fullDescription": "QuizWizz is primarily a UI/UX-driven application focused on fast interaction, clear navigation, and polished user flows for quiz sessions, scoring, and administration."
+          }
+        }
+      },
+      "experience": {
+        "heading": "Journey & Momentum",
+        "subtext": "Education, production pressure, and product delivery combined into one engineering approach.",
+        "items": {
+          "freelance": {
+            "role": "Software Engineer",
+            "company": "Freelance & Product Development",
+            "description": "Building fullstack software products from architecture to deployment, with focus on stable releases, clean CI/CD flows, and practical DevOps automation."
+          },
+          "tvjoj": {
+            "role": "Broadcast Technology & Live Production",
+            "company": "TV JOJ",
+            "description": "Stream directing, replay operations, graphics, and software tooling for live sports production. Built automation utilities and real-time workflows under high-pressure broadcast conditions."
+          }
+        }
+      },
+      "contact": {
+        "heading": "Let's Build Something Sharp",
+        "subtext": "Open to building custom software for businesses of any size, in Bratislava or remote."
+      }
+    },
+    "sk": {
+      "nav": {
+        "approach": "Prístup",
+        "projects": "Projekty",
+        "stack": "Technológie",
+        "experience": "Skúsenosti",
+        "contact": "Kontakt"
+      },
+      "hero": {
+        "headlineRest": "Vyvíjam webové aplikácie na mieru.",
+        "subtext": "Navrhujem a staviam aplikácie na mieru pre firmy akejkoľvek veľkosti, od prvého nápadu po každodennú prevádzku.",
+        "ctaPrimary": "Zobraziť projekty",
+        "ctaSecondary": "Kontakt"
+      },
+      "projects": {
+        "heading": "Vybrané projekty",
+        "subtext": "Výber aplikácií a nástrojov, na ktorých pracujem alebo som pracoval.",
+        "items": {
+          "zdravy-projekt": {
+            "type": "Aplikácia na objednávanie jedla",
+            "description": "Firemná aplikácia na jednoduchšie objednávanie jedla pre školy s vysokou dennou návštevnosťou.",
+            "fullDescription": "zdravy-projekt spracúva každodenné objednávky jedla pre školy. Aplikácia prepája externé API, podporuje inštaláciu ako PWA a posiela upozornenia. Je navrhnutá na spracovanie veľkého počtu objednávok."
+          },
+          "e-plant": {
+            "type": "E-commerce aplikácia",
+            "description": "E-commerce aplikácia na predaj dentálnych implantátov a kurzov.",
+            "fullDescription": "e-plant je e-commerce platforma pre dentálne implantáty a kurzy. Zahŕňa skladové procesy, notifikácie a integrácie s účtovným softvérom a prepravnými spoločnosťami."
+          },
+          "eventer": {
+            "type": "Redmine plugin",
+            "description": "Plugin pre Redmine na automatické priraďovanie úloh podľa kvalifikácie a dostupnosti.",
+            "fullDescription": "Eventer je plugin pre Redmine zameraný na automatizáciu, ktorý pomáha priraďovať úlohy vhodným členom tímu. Cieľom je plynulejší priebeh projektu, menej manuálnej práce a konzistentná logika priraďovania."
+          },
+          "quizwizz": {
+            "type": "UI/UX aplikácia",
+            "description": "Interaktívna kvízová platforma zameraná na UI/UX s okamžitým vyhodnotením, súťažou v reálnom čase a administráciou.",
+            "fullDescription": "QuizWizz je aplikácia zameraná predovšetkým na UI/UX, s dôrazom na rýchlu interakciu, prehľadnú navigáciu a doladené flow pre kvízy, vyhodnotenie a administráciu."
+          }
+        }
+      },
+      "experience": {
+        "heading": "Skúsenosti a vzdelanie",
+        "subtext": "Pri vývoji spájam štúdium informatiky so skúsenosťami z reálnych projektov a živého vysielania.",
+        "items": {
+          "freelance": {
+            "role": "Softvérový inžinier",
+            "company": "Freelance a produktový vývoj",
+            "description": "Vyvíjam aplikácie od návrhu architektúry po nasadenie. Venujem sa frontendu aj backendu, automatizácii nasadzovania a spoľahlivej prevádzke."
+          },
+          "tvjoj": {
+            "role": "Technológie živého vysielania",
+            "company": "TV JOJ",
+            "description": "Pri živých športových prenosoch sa venujem réžii streamu, opakovaným záberom a grafike. Vyvíjam aj nástroje, ktoré automatizujú prácu počas vysielania."
+          }
+        }
+      },
+      "contact": {
+        "heading": "Poďme vytvoriť niečo užitočné",
+        "subtext": "Máte nápad na aplikáciu alebo potrebujete zlepšiť existujúcu? Ozvite sa mi. Spolupracujem osobne aj na diaľku."
+      }
+    }
+  }
+}
